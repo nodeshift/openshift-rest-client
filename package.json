@@ -1,0 +1,47 @@
+{
+  "name": "openshift-client",
+  "version": "0.0.1",
+  "description": "Node.js client for developing with OpenShift",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint lib/*.js test/*.js index.js example.js example-with-request.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Openshift",
+    "Node.js"
+  ],
+  "author": {
+    "name": "Red Hat, Inc."
+  },
+  "maintainers": {
+    "name": "Lucas Holmquist",
+    "email": "lholmqui@redhat.com"
+  },
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bucharest-gold/openshift-client"
+  },
+  "bugs": "https://github.com/bucharest-gold/openshift-client/issues",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "js-yaml": "^3.8.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.0.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nsp": "^2.6.3",
+    "nyc": "^10.3.2",
+    "tape": "^4.6.3"
+  }
+}
