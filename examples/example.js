@@ -62,6 +62,30 @@ const imageStreamConfig = {
   spec: {} // required
 };
 
+// const serviceConfig = {
+//   apiVersion: 'v1', // not required
+//   kind: 'Service', // not required
+//   metadata: { // not required
+//     name: 'nodejs-rest-http', // This is the stream name, i think we can get this from the clint config
+//     labels: {
+//       group: 'io.openshift.booster', // Not sure where to get this one?
+//       project: 'nodejs-rest-http', // get this from the projects package.json
+//       provider: 'nodejs', // maybe?  this was originall fabric8
+//       version: '0.0.1' // get this from the projects package.json
+//     }
+//   },
+//   spec: { // required
+//     ports: [
+//       {
+//         protocol: 'TCP', // TCP is the default, do we need to specifiy
+//         port: 8080,
+//         targetPort: 8080
+//       }
+//     ],
+//     type: 'ClusterIP' // will default to this if not there
+//   }
+// };
+
 const buildName = 'nodejs-rest-http-s2i';
 const imageName = 'nodejs-rest-http';
 
