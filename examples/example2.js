@@ -103,8 +103,9 @@ const deploymentConfig = {
       spec: {
         containers: [
           {
-            image: 'nodejs-rest-http:latest', // required
-            name: 'nodejs', // required
+            // image: '172.30.1.1:5000/for-node-client-testing/nodejs-rest-http@sha256:abb02a0e79d867e18f04957e48eb21751a9b9c1af5877cb71eb5d5c29d639ba2',
+            image: '172.30.1.1:5000/for-node-client-testing/nodejs-rest-http:latest', // required
+            name: 'nodejs-rest-http', // required
             securityContext: {
               privileged: false
             },
@@ -249,11 +250,46 @@ const deploymentConfig = {
 //           name: wfswarm-rest-http:latest
 //       type: ImageChange
 
+const routeConfig = {
+  apiVersion: 'v1',
+  kind: 'Route',
+  metadata: { // not required
+    name: 'nodejs-rest-http', // This is the stream name, i think we can get this from the clint config
+    labels: {
+      group: 'io.openshift.booster', // Not sure where to get this one?
+      project: 'nodejs-rest-http', // get this from the projects package.json
+      provider: 'nodejs', // maybe?  this was originall fabric8
+      version: '0.0.1' // get this from the projects package.json
+    }
+  },
+  spec: {
+    port: {
+      targetPort: 8080
+    },
+    to: {
+      kind: 'Service',
+      name: 'nodejs-rest-http'
+    }
+  }
+};
+
+// apiVersion: v1
+//   kind: Route
+//   metadata:
+//     labels:
+//       provider: fabric8
+//       project: wfswarm-rest-http
+//       version: 7-SNAPSHOT
+//       group: io.openshift.booster
+//     name: wfswarm-rest-http
+//   spec:
+//     port:
+//       targetPort: 8080
+//     to:
+//       kind: Service
+//       name: wfswarm-rest-http
+
 // This is where we get our service/deploymentconfig/route definitions
-
-  // Then look up routes
-
-  // if no routes, then create one
 
   // Ping service endpoint until something, then finished
 
@@ -286,5 +322,20 @@ openshiftClient().then(client => {
     console.log(deployment);
   }).then((deployment) => {
     console.log(deployment);
+
+    // Then look up routes
+    return client.routes.find(imageName);
+
+    // if no routes, then create one
+  }).then((route) => {
+    if (route.code === 404) {
+      console.log('Need to create a route');
+      return client.routes.create(routeConfig);
+    }
+
+    return route;
+  }).then((route) => {
+    console.log('Route Created');
+    console.log(route);
   });
 });
