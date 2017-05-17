@@ -8,7 +8,7 @@
     "test": "tape test/*-test.js | tap-spec",
     "prepublish": "nsp check",
     "coverage": "istanbul cover tape -- test/**/*.js",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "Openshift",

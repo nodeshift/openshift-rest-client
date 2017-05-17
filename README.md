@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bucharest-gold/openshift-rest-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/openshift-rest-client)
+[![Build Status](https://travis-ci.org/bucharest-gold/openshift-rest-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/openshift-rest-client)  [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/openshift-rest-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/openshift-rest-client?branch=master)
 
 ### Openshift Client
 
