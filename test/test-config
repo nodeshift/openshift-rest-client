@@ -1,0 +1,27 @@
+apiVersion: v1
+clusters:
+- cluster:
+    server: https://192.168.99.100:8443
+  name: 192-168-99-100:8443
+contexts:
+- context:
+    cluster: 192-168-99-100:8443
+    user: developer/192-168-99-100:8443
+  name: /192-168-99-100:8443/developer
+- context:
+    cluster: 192-168-99-100:8443
+    namespace: for-node-client-testing
+    user: developer/192-168-99-100:8443
+  name: for-node-client-testing/192-168-99-100:8443/developer
+- context:
+    cluster: 192-168-99-100:8443
+    namespace: for-testing-purposes
+    user: developer/192-168-99-100:8443
+  name: for-testing-purposes/192-168-99-100:8443/developer
+current-context: for-node-client-testing/192-168-99-100:8443/developer
+kind: Config
+preferences: {}
+users:
+- name: developer/192-168-99-100:8443
+  user:
+    token: zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U
