@@ -10,6 +10,13 @@
     "coverage": "istanbul cover tape -- test/**/*.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "index.js",
+    "lib"
+  ],
   "keywords": [
     "Openshift",
     "Node.js"
