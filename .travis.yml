@@ -2,7 +2,9 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
+  - "4"
   - "6"
+  - "7"
 script:
    - npm run coveralls
 notifications:
