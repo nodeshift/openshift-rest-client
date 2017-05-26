@@ -38,7 +38,6 @@
   "bugs": "https://github.com/bucharest-gold/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
-    "js-yaml": "^3.8.4",
     "request": "^2.81.0"
   },
   "devDependencies": {
