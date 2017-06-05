@@ -58,7 +58,7 @@ test('find - build-config - not found', (t) => {
       nock(clientConfig.cluster)
         .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
         .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}`)
-        .reply(200, mockedErrorMessage);
+        .reply(404, mockedErrorMessage);
 
       client.buildconfigs.find(buildConfigName).then((buildconfig) => {
         t.equal(buildconfig.kind, 'Status', 'returns an object with Status');
