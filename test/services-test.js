@@ -62,3 +62,45 @@ test('create - services', (t) => {
     });
   });
 });
+
+test('remove - services - basic remove', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.services.remove, 'function', 'There is a remove method on the services object');
+
+      const clientConfig = privates.get(client).config;
+      const serviceName = 'cool-service-name';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/services/${serviceName}`)
+        .reply(200, {kind: 'Status'});
+
+      const removeResult = client.services.remove(serviceName).then((status) => {
+        t.equal(status.kind, 'Status', 'returns an object with Status');
+        t.end();
+      });
+
+      t.equal(removeResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('remove - services - remove - no rep name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.services.remove().catch((err) => {
+        t.equal(err.message, 'Service Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});

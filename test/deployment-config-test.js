@@ -62,3 +62,45 @@ test('create - deployment-config', (t) => {
     });
   });
 });
+
+test('remove - deployment config - basic remove', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.deploymentconfigs.remove, 'function', 'There is a remove method on the deploymentconfigs object');
+
+      const clientConfig = privates.get(client).config;
+      const deploymentConfigName = 'cool-deployment-name';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/deploymentconfigs/${deploymentConfigName}`)
+        .reply(200, {kind: 'Status'});
+
+      const removeResult = client.deploymentconfigs.remove(deploymentConfigName).then((status) => {
+        t.equal(status.kind, 'Status', 'returns an object with Status');
+        t.end();
+      });
+
+      t.equal(removeResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('remove - deployment config - remove - no rep name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.deploymentconfigs.remove().catch((err) => {
+        t.equal(err.message, 'Deployment Config Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
