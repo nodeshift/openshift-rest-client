@@ -2,6 +2,8 @@
 
 ### Openshift Client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bucharest-gold/openshift-rest-client.svg)](https://greenkeeper.io/)
+
 Node.js based client for the Openshift REST API, not unlike the Fabric8 Maven Plugin, but for node clients/builds.
 
 ### Usage
