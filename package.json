@@ -52,7 +52,7 @@
     "eslint-plugin-react": "^7.0.0",
     "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.5",
-    "nock": "^9.0.13",
+    "nock": "^9.0.14",
     "nsp": "^2.6.3",
     "nyc": "^10.3.2",
     "openshift-config-loader": "^0.1.1",
