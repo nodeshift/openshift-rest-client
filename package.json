@@ -55,7 +55,7 @@
     "nock": "^9.0.14",
     "nsp": "^2.6.3",
     "nyc": "^11.1.0",
-    "openshift-config-loader": "^0.3.0",
+    "openshift-config-loader": "^0.4.0",
     "proxyquire": "^1.8.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3"
