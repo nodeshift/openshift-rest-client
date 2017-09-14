@@ -62,3 +62,45 @@ test('create - imagestreams', (t) => {
     });
   });
 });
+
+test('remove - imagestreams - basic remove', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.imagestreams.remove, 'function', 'There is a remove method on the image streams object');
+
+      const clientConfig = privates.get(client).config;
+      const imageStreamName = 'cool-deployment-name-1';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams/${imageStreamName}`)
+        .reply(200, {kind: 'Status'});
+
+      const removeResult = client.imagestreams.remove(imageStreamName).then((status) => {
+        t.equal(status.kind, 'Status', 'returns an object with Status');
+        t.end();
+      });
+
+      t.equal(removeResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('remove - imagestreams - remove - no build config name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.imagestreams.remove().catch((err) => {
+        t.equal(err.message, 'Image Stream Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
