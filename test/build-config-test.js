@@ -104,3 +104,45 @@ test('create a build-config', (t) => {
     });
   });
 });
+
+test('remove - build-config - basic remove', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.buildconfigs.remove, 'function', 'There is a remove method on the build configs object');
+
+      const clientConfig = privates.get(client).config;
+      const buildConfigName = 'cool-deployment-name-1';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}`)
+        .reply(200, {kind: 'Status'});
+
+      const removeResult = client.buildconfigs.remove(buildConfigName).then((status) => {
+        t.equal(status.kind, 'Status', 'returns an object with Status');
+        t.end();
+      });
+
+      t.equal(removeResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('remove - build-configs - remove - no build config name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.buildconfigs.remove().catch((err) => {
+        t.equal(err.message, 'Build Config Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
