@@ -39,7 +39,7 @@
   "bugs": "https://github.com/bucharest-gold/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
