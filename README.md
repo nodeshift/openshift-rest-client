@@ -33,7 +33,7 @@ Code:
     openshiftConfigLoader(settings).then((config) => {
       openshiftRestClient(config).then((client) => {
         // Use the client object to find a list of projects, for example
-        client.projects.find().then((projects) => {
+        client.projects.findAll().then((projects) => {
           console.log(projects);
         });
       });
