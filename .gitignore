@@ -4,6 +4,7 @@ docs/
 # Logs
 logs
 *.log
+.idea/
 npm-debug.log*
 
 # Runtime data
