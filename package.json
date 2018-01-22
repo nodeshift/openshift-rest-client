@@ -1,6 +1,6 @@
 {
   "name": "openshift-rest-client",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Node.js client for developing with OpenShift",
   "main": "index.js",
   "scripts": {
