@@ -22,7 +22,7 @@ test('testing project endpoint', (t) => {
         .get('/oapi/v1/projects')
         .reply(200, {mocked: 'mocked'});
 
-      client.projects.find().then((projects) => {
+      client.projects.findAll().then((projects) => {
         t.pass('return successful');
         t.end();
       });
