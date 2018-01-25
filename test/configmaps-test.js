@@ -134,6 +134,21 @@ test('update - configmap', (t) => {
   });
 });
 
+test('update - configmaps - update - no configmap name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.configmaps.update().catch((err) => {
+        t.equal(err.message, 'Config Map Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - configmaps - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

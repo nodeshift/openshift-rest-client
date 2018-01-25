@@ -134,6 +134,21 @@ test('update - deploymentconfig', (t) => {
   });
 });
 
+test('update - deploymentconfigs - update - no deploymentconfig name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.deploymentconfigs.update().catch((err) => {
+        t.equal(err.message, 'Deployment Config Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - deploymentconfigs - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

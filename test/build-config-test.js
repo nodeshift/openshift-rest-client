@@ -134,6 +134,21 @@ test('update - buildconfig', (t) => {
   });
 });
 
+test('update - buildconfigs - update - no buildconfig name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.buildconfigs.update().catch((err) => {
+        t.equal(err.message, 'Build Config Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - buildconfigs - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
