@@ -7,7 +7,7 @@ const openshiftRestClient = require('../');
 const openshiftConfigLoader = require('openshift-config-loader');
 const privates = require('../lib/private-map');
 
-test('find - replication-controller - basic findAll', (t) => {
+test('find - replicationcontrollers - basic findAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
@@ -23,8 +23,8 @@ test('find - replication-controller - basic findAll', (t) => {
         .get(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
         .reply(200, {kind: 'ReplicationControllerList'});
 
-      const findResult = client.replicationcontrollers.findAll().then((replicationControllersList) => {
-        t.equal(replicationControllersList.kind, 'ReplicationControllerList', 'returns an object with ReplicationControllerList');
+      const findResult = client.replicationcontrollers.findAll().then((replicationControllerList) => {
+        t.equal(replicationControllerList.kind, 'ReplicationControllerList', 'returns an object with ReplicationControllerList');
         t.end();
       });
 
@@ -33,7 +33,7 @@ test('find - replication-controller - basic findAll', (t) => {
   });
 });
 
-test('find - replication-controller - basic find', (t) => {
+test('find - replicationcontrollers - basic find', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
@@ -43,15 +43,15 @@ test('find - replication-controller - basic find', (t) => {
       t.equal(typeof client.replicationcontrollers.find, 'function', 'There is a find method on the replicationcontrollers object');
 
       const clientConfig = privates.get(client).config;
-      const replicationControllerName = 'cool-deployment-name-1';
+      const replicationControllerName = 'cool-replicationcontroller-name-1';
 
       nock(clientConfig.cluster)
         .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
         .get(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers/${replicationControllerName}`)
         .reply(200, {kind: 'ReplicationController'});
 
-      const findResult = client.replicationcontrollers.find(replicationControllerName).then((replicationController) => {
-        t.equal(replicationController.kind, 'ReplicationController', 'returns an object with ReplicationController');
+      const findResult = client.replicationcontrollers.find(replicationControllerName).then((replicationcontroller) => {
+        t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
         t.end();
       });
 
@@ -60,7 +60,7 @@ test('find - replication-controller - basic find', (t) => {
   });
 });
 
-test('find - replication-controller - find - no rep name', (t) => {
+test('find - replicationcontrollers - find - no replicationcontroller name', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
@@ -75,7 +75,66 @@ test('find - replication-controller - find - no rep name', (t) => {
   });
 });
 
-test('remove - replication-controller - basic removeAll', (t) => {
+test('create - replicationcontroller', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.replicationcontrollers.create, 'function', 'There is a create method on the replicationcontrollers object');
+
+      const clientConfig = privates.get(client).config;
+      const replicationcontroller = {
+        kind: 'ReplicationController'
+      };
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .post(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
+        .reply(200, {kind: 'ReplicationController'});
+
+      const createResult = client.replicationcontrollers.create(replicationcontroller).then((replicationcontroller) => {
+        t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
+        t.end();
+      });
+
+      t.equal(createResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('update - replicationcontroller', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.replicationcontrollers.create, 'function', 'There is a create method on the replicationcontrollers object');
+
+      const clientConfig = privates.get(client).config;
+      const replicationcontroller = {
+        kind: 'ReplicationController'
+      };
+      const replicationControllerName = 'cool-replicationcontroller-name-1';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .put(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers/${replicationControllerName}`)
+        .reply(200, {kind: 'ReplicationController'});
+
+      const createResult = client.replicationcontrollers.update(replicationControllerName, replicationcontroller).then((replicationcontroller) => {
+        t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
+        t.end();
+      });
+
+      t.equal(createResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
+test('remove - replicationcontrollers - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
@@ -89,12 +148,10 @@ test('remove - replication-controller - basic removeAll', (t) => {
       nock(clientConfig.cluster)
         .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
         .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
-        .reply(200, {kind: 'ReplicationControllerList'});
+        .reply(200, {kind: 'Status'});
 
-      // Note: https://docs.openshift.org/latest/rest_api/kubernetes_v1.html#delete-collection-of-replicationcontroller says it return a Status object
-      // but it really returns a ReplicationControllerList object,  possible doc error?
-      const removeResult = client.replicationcontrollers.removeAll().then((replicationControllersList) => {
-        t.equal(replicationControllersList.kind, 'ReplicationControllerList', 'returns an object with ReplicationControllerList');
+      const removeResult = client.replicationcontrollers.removeAll().then((replicationControllerList) => {
+        t.equal(replicationControllerList.kind, 'Status', 'returns an object with Status');
         t.end();
       });
 
@@ -103,7 +160,7 @@ test('remove - replication-controller - basic removeAll', (t) => {
   });
 });
 
-test('remove - replication-controller - basic remove', (t) => {
+test('remove - replicationcontrollers - basic remove', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
@@ -113,7 +170,7 @@ test('remove - replication-controller - basic remove', (t) => {
       t.equal(typeof client.replicationcontrollers.remove, 'function', 'There is a remove method on the replicationcontrollers object');
 
       const clientConfig = privates.get(client).config;
-      const replicationControllerName = 'cool-deployment-name-1';
+      const replicationControllerName = 'cool-replicationcontroller-name-1';
 
       nock(clientConfig.cluster)
         .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
@@ -130,7 +187,7 @@ test('remove - replication-controller - basic remove', (t) => {
   });
 });
 
-test('remove - replication-controller - remove - no rep name', (t) => {
+test('remove - replicationcontrollers - remove - no replicationcontroller name', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
