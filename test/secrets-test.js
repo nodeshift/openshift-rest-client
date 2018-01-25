@@ -134,6 +134,21 @@ test('update - secret', (t) => {
   });
 });
 
+test('update - secrets - update - no secret name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.secrets.update().catch((err) => {
+        t.equal(err.message, 'Secret Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - secrets - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

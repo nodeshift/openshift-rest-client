@@ -134,6 +134,21 @@ test('update - route', (t) => {
   });
 });
 
+test('update - routes - update - no route name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.routes.update().catch((err) => {
+        t.equal(err.message, 'Route Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - routes - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

@@ -134,6 +134,21 @@ test('update - replicationcontroller', (t) => {
   });
 });
 
+test('update - replicationcontrollers - update - no replicationcontroller name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.replicationcontrollers.update().catch((err) => {
+        t.equal(err.message, 'Replication Controller Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - replicationcontrollers - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

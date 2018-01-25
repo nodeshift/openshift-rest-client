@@ -134,6 +134,21 @@ test('update - rolebinding', (t) => {
   });
 });
 
+test('update - rolebindings - update - no rolebinding name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.rolebindings.update().catch((err) => {
+        t.equal(err.message, 'Role Binding Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - rolebindings - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`

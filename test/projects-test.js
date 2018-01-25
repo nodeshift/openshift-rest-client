@@ -134,6 +134,21 @@ test('update - project', (t) => {
   });
 });
 
+test('update - projects - update - no project name', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      client.projects.update().catch((err) => {
+        t.equal(err.message, 'Project Name is required', 'error message should return');
+        t.end();
+      });
+    });
+  });
+});
+
 test('remove - projects - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
