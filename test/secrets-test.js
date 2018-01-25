@@ -104,6 +104,36 @@ test('create - secret', (t) => {
   });
 });
 
+test('update - secret', (t) => {
+  const settings = {
+    configLocation: `${__dirname}/test-config`
+  };
+
+  openshiftConfigLoader(settings).then((config) => {
+    openshiftRestClient(config).then((client) => {
+      t.equal(typeof client.secrets.create, 'function', 'There is a create method on the secrets object');
+
+      const clientConfig = privates.get(client).config;
+      const secret = {
+        kind: 'Secret'
+      };
+      const secretName = 'cool-deployment-name-1';
+
+      nock(clientConfig.cluster)
+        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+        .put(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets/${secretName}`)
+        .reply(200, {kind: 'Secret'});
+
+      const createResult = client.secrets.update(secretName, secret).then((secret) => {
+        t.equal(secret.kind, 'Secret', 'returns an object with Secret');
+        t.end();
+      });
+
+      t.equal(createResult instanceof Promise, true, 'should return a Promise');
+    });
+  });
+});
+
 test('remove - secrets - basic removeAll', (t) => {
   const settings = {
     configLocation: `${__dirname}/test-config`
