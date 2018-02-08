@@ -6,35 +6,47 @@
 
 Node.js based client for the Openshift REST API, not unlike the Fabric8 Maven Plugin, but for node clients/builds.
 
-### Usage
+### Basic Usage
 
 `npm install --save openshift-rest-client`
 
-The client needs to be passed a `config` object with the follow properties:
-
-    { apiVersion: 'v1',
-    context:
-     { cluster: '192-168-99-100:8443',
-       namespace: 'for-node-client-testing',
-       user: 'developer/192-168-99-100:8443' },
-    user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
-    cluster: 'https://192.168.99.100:8443' }
-
-This can be obtained using the [openshift-config-loader](https://www.npmjs.com/package/openshift-config-loader)
-
-By default, the config loader with look for a config at `~/.kube/config`
-
-
 Code:
 
-    const openshiftConfigLoader = require('openshift-config-loader');
     const openshiftRestClient = require('openshift-rest-client');
 
-    openshiftConfigLoader(settings).then((config) => {
-      openshiftRestClient(config).then((client) => {
-        // Use the client object to find a list of projects, for example
-        client.projects.findAll().then((projects) => {
-          console.log(projects);
-        });
+    openshiftRestClient().then((client) => {
+      // Use the client object to find a list of projects, for example
+      client.projects.findAll().then((projects) => {
+        console.log(projects);
       });
     });
+
+
+### Advanced Usage
+
+By default, the openshift-rest-client will use the [openshift-config-loader](https://www.npmjs.com/package/openshift-config-loader) module to get your openshift configuration.
+
+You can pass in a custom config object by using the `settings` object
+
+    const openshiftRestClient = require('openshift-rest-client');
+    const settings = {};
+
+    const customConfig = {
+      apiVersion: 'v1',
+      context:
+      { cluster: '192-168-99-100:8443',
+        namespace: 'for-node-client-testing',
+        user: 'developer/192-168-99-100:8443' },
+      user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
+      cluster: 'https://192.168.99.100:8443' }
+    };
+
+    settings.config = customConfig;
+
+    openshiftRestClient(settings).then((client) => {
+      // Use the client object to find a list of projects, for example
+      client.projects.findAll().then((projects) => {
+        console.log(projects);
+      });
+    });
+

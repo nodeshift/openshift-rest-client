@@ -42,7 +42,7 @@ test('openshift client settings test', (t) => {
     }
   };
 
-  const osClient = openshiftRestClient(null, settings);
+  const osClient = openshiftRestClient(settings);
 
   osClient.then((client) => {
     t.ok(client.settings, 'client object should have a settings object');
