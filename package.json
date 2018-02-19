@@ -40,6 +40,7 @@
   "bugs": "https://github.com/bucharest-gold/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
+    "hoek": "^4.2.1",
     "openshift-config-loader": "^0.4.0",
     "request": "^2.83.0"
   },
