@@ -194,6 +194,15 @@ test('instantiate - buildconfig', (t) => {
   });
 });
 
+test('instantiate - buildconfigs - no buildconfig name', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    client.buildconfigs.instantiate().catch((err) => {
+      t.equal(err.message, 'Build Config Name is required', 'error message should return');
+      t.end();
+    });
+  });
+});
+
 test('instantiateBinary - buildconfig', (t) => {
   openshiftRestClient(settings).then((client) => {
     t.equal(typeof client.buildconfigs.instantiateBinary, 'function', 'There is an instantiateBinary method on the buildconfigs object');
@@ -214,5 +223,14 @@ test('instantiateBinary - buildconfig', (t) => {
 
       t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');
     } catch (err) { console.error(err); }
+  });
+});
+
+test('instantiateBinary - buildconfigs - no buildconfig name', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    client.buildconfigs.instantiateBinary().catch((err) => {
+      t.equal(err.message, 'Build Config Name is required', 'error message should return');
+      t.end();
+    });
   });
 });
