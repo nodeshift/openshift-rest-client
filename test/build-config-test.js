@@ -202,7 +202,6 @@ test('instantiateBinary - buildconfig', (t) => {
     const buildConfigName = 'cool-buildconfig-name-1';
 
     try {
-
       nock(clientConfig.cluster)
         .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
         .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiatebinary`)
@@ -214,7 +213,6 @@ test('instantiateBinary - buildconfig', (t) => {
       });
 
       t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');
-
-    } catch (err) { console.error(err) }
+    } catch (err) { console.error(err); }
   });
 });
