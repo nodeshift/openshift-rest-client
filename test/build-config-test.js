@@ -210,19 +210,17 @@ test('instantiateBinary - buildconfig', (t) => {
     const clientConfig = privates.get(client).config;
     const buildConfigName = 'cool-buildconfig-name-1';
 
-    try {
-      nock(clientConfig.cluster)
-        .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
-        .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiatebinary`)
-        .reply(200, {kind: 'BinaryBuildRequest'});
+    nock(clientConfig.cluster)
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiatebinary`)
+      .reply(200, {kind: 'BinaryBuildRequest'});
 
-      const instantiateBinaryResult = client.buildconfigs.instantiateBinary(buildConfigName).then((binarybuildrequest) => {
-        t.equal(binarybuildrequest.kind, 'BinaryBuildRequest', 'returns an object with BinaryBuildRequest');
-        t.end();
-      });
+    const instantiateBinaryResult = client.buildconfigs.instantiateBinary(buildConfigName).then((binarybuildrequest) => {
+      t.equal(binarybuildrequest.kind, 'BinaryBuildRequest', 'returns an object with BinaryBuildRequest');
+      t.end();
+    });
 
-      t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');
-    } catch (err) { console.error(err); }
+    t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');z
   });
 });
 
