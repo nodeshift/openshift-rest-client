@@ -220,7 +220,7 @@ test('instantiateBinary - buildconfig', (t) => {
       t.end();
     });
 
-    t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');z
+    t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');
   });
 });
 
