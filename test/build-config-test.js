@@ -172,3 +172,63 @@ test('remove - buildconfigs - remove - no buildconfig name', (t) => {
     });
   });
 });
+
+test('instantiate - buildconfig', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    t.equal(typeof client.buildconfigs.instantiate, 'function', 'There is an instantiate method on the buildconfigs object');
+
+    const clientConfig = privates.get(client).config;
+    const buildConfigName = 'cool-buildconfig-name-1';
+
+    nock(clientConfig.cluster)
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiate`)
+      .reply(200, {kind: 'BuildRequest'});
+
+    const instantiateResult = client.buildconfigs.instantiate(buildConfigName).then((buildrequest) => {
+      t.equal(buildrequest.kind, 'BuildRequest', 'returns an object with BuildRequest');
+      t.end();
+    });
+
+    t.equal(instantiateResult instanceof Promise, true, 'should return a Promise');
+  });
+});
+
+test('instantiate - buildconfigs - no buildconfig name', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    client.buildconfigs.instantiate().catch((err) => {
+      t.equal(err.message, 'Build Config Name is required', 'error message should return');
+      t.end();
+    });
+  });
+});
+
+test('instantiateBinary - buildconfig', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    t.equal(typeof client.buildconfigs.instantiateBinary, 'function', 'There is an instantiateBinary method on the buildconfigs object');
+
+    const clientConfig = privates.get(client).config;
+    const buildConfigName = 'cool-buildconfig-name-1';
+
+    nock(clientConfig.cluster)
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiatebinary`)
+      .reply(200, {kind: 'BinaryBuildRequest'});
+
+    const instantiateBinaryResult = client.buildconfigs.instantiateBinary(buildConfigName).then((binarybuildrequest) => {
+      t.equal(binarybuildrequest.kind, 'BinaryBuildRequest', 'returns an object with BinaryBuildRequest');
+      t.end();
+    });
+
+    t.equal(instantiateBinaryResult instanceof Promise, true, 'should return a Promise');
+  });
+});
+
+test('instantiateBinary - buildconfigs - no buildconfig name', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    client.buildconfigs.instantiateBinary().catch((err) => {
+      t.equal(err.message, 'Build Config Name is required', 'error message should return');
+      t.end();
+    });
+  });
+});
