@@ -4,13 +4,36 @@
   "description": "Node.js client for developing with OpenShift",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint lib/*.js test/*.js index.js example.js example-with-request.js",
+    "lint": "xo",
     "test": "tape test/*-test.js | tap-spec",
     "prepublish": "nsp check",
-    "coverage": "istanbul cover tape -- test/**/*.js",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
+    "coverage": "nyc npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "ci": "npm run lint && npm run coveralls",
     "release": "standard-version"
+  },
+  "xo": {
+    "space": 2,
+    "rules": {
+      "space-before-function-paren": [
+        "error",
+        "always"
+      ],
+      "func-names": [
+        "error",
+        "always"
+      ]
+    },
+    "overrides": [
+      {
+        "files": "test/*.js",
+        "rules": {
+          "promise/prefer-await-to-then": [
+            "off"
+          ]
+        }
+      }
+    ]
   },
   "files": [
     "package.json",
@@ -45,21 +68,13 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "eslint": "^4.18.0",
-    "eslint-config-semistandard": "^12.0.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^7.0.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "istanbul": "^0.4.5",
     "nock": "^9.0.14",
     "nsp": "^3.1.0",
     "nyc": "^11.1.0",
     "proxyquire": "^2.0.0",
     "standard-version": "^4.3.0",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.3"
+    "tape": "^4.6.3",
+    "xo": "~0.20.3"
   }
 }
