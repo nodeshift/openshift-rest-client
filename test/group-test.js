@@ -3,32 +3,32 @@
 const test = require('tape');
 const nock = require('nock');
 
-const openshiftRestClient = require('../');
+const openshiftRestClient = require('..');
 const privates = require('../lib/private-map');
 
 const settings = {
   config: {
     apiVersion: 'v1',
     context:
-     { cluster: '192-168-99-100:8443',
+     {cluster: '192-168-99-100:8443',
        namespace: 'for-node-client-testing',
-       user: 'developer/192-168-99-100:8443' },
-    user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
-    cluster: 'https://192.168.99.100:8443' }
+       user: 'developer/192-168-99-100:8443'},
+    user: {token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U'},
+    cluster: 'https://192.168.99.100:8443'}
 };
 
-test('find - groups - basic findAll', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('find - groups - basic findAll', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.findAll, 'function', 'There is a findAll method on the groups object');
 
     const clientConfig = privates.get(client).config;
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .get(`/oapi/v1/groups`)
       .reply(200, {kind: 'GroupList'});
 
-    const findResult = client.groups.findAll().then((groupList) => {
+    const findResult = client.groups.findAll().then(groupList => {
       t.equal(groupList.kind, 'GroupList', 'returns an object with GroupList');
       t.end();
     });
@@ -37,19 +37,19 @@ test('find - groups - basic findAll', (t) => {
   });
 });
 
-test('find - groups - basic find', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('find - groups - basic find', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.find, 'function', 'There is a find method on the groups object');
 
     const clientConfig = privates.get(client).config;
     const groupName = 'cool-group-name-1';
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .get(`/oapi/v1/groups/${groupName}`)
       .reply(200, {kind: 'Group'});
 
-    const findResult = client.groups.find(groupName).then((group) => {
+    const findResult = client.groups.find(groupName).then(group => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
       t.end();
     });
@@ -58,17 +58,17 @@ test('find - groups - basic find', (t) => {
   });
 });
 
-test('find - groups - find - no group name', (t) => {
-  openshiftRestClient(settings).then((client) => {
-    client.groups.find().catch((err) => {
+test('find - groups - find - no group name', t => {
+  openshiftRestClient(settings).then(client => {
+    client.groups.find().catch(err => {
       t.equal(err.message, 'Group Name is required', 'error message should return');
       t.end();
     });
   });
 });
 
-test('create - group', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('create - group', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.create, 'function', 'There is a create method on the groups object');
 
     const clientConfig = privates.get(client).config;
@@ -77,11 +77,11 @@ test('create - group', (t) => {
     };
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .post(`/oapi/v1/groups`)
       .reply(200, {kind: 'Group'});
 
-    const createResult = client.groups.create(group).then((group) => {
+    const createResult = client.groups.create(group).then(group => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
       t.end();
     });
@@ -90,8 +90,8 @@ test('create - group', (t) => {
   });
 });
 
-test('update - group', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('update - group', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.create, 'function', 'There is a create method on the groups object');
 
     const clientConfig = privates.get(client).config;
@@ -101,11 +101,11 @@ test('update - group', (t) => {
     const groupName = 'cool-group-name-1';
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .put(`/oapi/v1/groups/${groupName}`)
       .reply(200, {kind: 'Group'});
 
-    const createResult = client.groups.update(groupName, group).then((group) => {
+    const createResult = client.groups.update(groupName, group).then(group => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
       t.end();
     });
@@ -114,28 +114,27 @@ test('update - group', (t) => {
   });
 });
 
-test('update - groups - update - no group name', (t) => {
-  openshiftRestClient(settings).then((client) => {
-    client.groups.update().catch((
-      err) => {
+test('update - groups - update - no group name', t => {
+  openshiftRestClient(settings).then(client => {
+    client.groups.update().catch(err => {
       t.equal(err.message, 'Group Name is required', 'error message should return');
       t.end();
     });
   });
 });
 
-test('remove - groups - basic removeAll', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('remove - groups - basic removeAll', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.removeAll, 'function', 'There is a removeAll method on the groups object');
 
     const clientConfig = privates.get(client).config;
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .delete(`/oapi/v1/groups`)
       .reply(200, {kind: 'Status'});
 
-    const removeResult = client.groups.removeAll().then((groupList) => {
+    const removeResult = client.groups.removeAll().then(groupList => {
       t.equal(groupList.kind, 'Status', 'returns an object with Status');
       t.end();
     });
@@ -144,19 +143,19 @@ test('remove - groups - basic removeAll', (t) => {
   });
 });
 
-test('remove - groups - basic remove', (t) => {
-  openshiftRestClient(settings).then((client) => {
+test('remove - groups - basic remove', t => {
+  openshiftRestClient(settings).then(client => {
     t.equal(typeof client.groups.remove, 'function', 'There is a remove method on the groups object');
 
     const clientConfig = privates.get(client).config;
     const groupName = 'cool-group-name-1';
 
     nock(clientConfig.cluster)
-      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
+      .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // Taken from the config
       .delete(`/oapi/v1/groups/${groupName}`)
       .reply(200, {kind: 'Status'});
 
-    const removeResult = client.groups.remove(groupName).then((status) => {
+    const removeResult = client.groups.remove(groupName).then(status => {
       t.equal(status.kind, 'Status', 'returns an object with Status');
       t.end();
     });
@@ -165,9 +164,9 @@ test('remove - groups - basic remove', (t) => {
   });
 });
 
-test('remove - groups - remove - no group name', (t) => {
-  openshiftRestClient(settings).then((client) => {
-    client.groups.remove().catch((err) => {
+test('remove - groups - remove - no group name', t => {
+  openshiftRestClient(settings).then(client => {
+    client.groups.remove().catch(err => {
       t.equal(err.message, 'Group Name is required', 'error message should return');
       t.end();
     });
