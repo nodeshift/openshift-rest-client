@@ -21,6 +21,7 @@ test('openshift client tests', (t) => {
     t.ok(client.buildconfigs, 'client object should have a buildconfigs object');
     t.ok(client.services, 'client object should have a services object');
     t.ok(client.deploymentconfigs, 'client object should have a deploymentconfigs object');
+    t.ok(client.events, 'client object should have a events object');
     t.ok(client.persistentvolumeclaims, 'client object should have a persistentvolumeclaims object');
     t.ok(client.routes, 'client object should have a routes object');
     t.end();
