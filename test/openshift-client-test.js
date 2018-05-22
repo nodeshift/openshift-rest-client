@@ -3,9 +3,9 @@
 const test = require('tape');
 const proxyquire = require('proxyquire');
 
-test('openshift client tests', (t) => {
+test('openshift client tests', t => {
   // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
+  const stubbedConfigLoader = client => {
     return Promise.resolve(client);
   };
 
@@ -16,7 +16,7 @@ test('openshift client tests', (t) => {
   const osClient = openshiftRestClient();
   t.equal(osClient instanceof Promise, true, 'should return a Promise');
 
-  osClient.then((client) => {
+  osClient.then(client => {
     t.ok(client.projects, 'client object should have a projects object');
     t.ok(client.buildconfigs, 'client object should have a buildconfigs object');
     t.ok(client.services, 'client object should have a services object');
@@ -28,9 +28,9 @@ test('openshift client tests', (t) => {
   });
 });
 
-test('openshift client settings test', (t) => {
+test('openshift client settings test', t => {
   // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
+  const stubbedConfigLoader = client => {
     return Promise.resolve(client);
   };
 
@@ -46,7 +46,7 @@ test('openshift client settings test', (t) => {
 
   const osClient = openshiftRestClient(settings);
 
-  osClient.then((client) => {
+  osClient.then(client => {
     t.ok(client.settings, 'client object should have a settings object');
     console.log(client.settings);
     t.ok(client.settings.request, 'client object should have a settings.request object');

@@ -18,4 +18,4 @@
  *
  */
 
-module.exports = exports = require('./lib/openshift-rest-client.js');
+module.exports = require('./lib/openshift-rest-client.js');
