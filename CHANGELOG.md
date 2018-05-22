@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.1.2...v1.2.0) (2018-05-22)
+
+
+### Bug Fixes
+
+* **tests:** missing PVC test ([f10cdc8](https://github.com/bucharest-gold/openshift-rest-client/commit/f10cdc8))
+
+
+### Features
+
+* **events:** events findAll/find & tests ([14577a2](https://github.com/bucharest-gold/openshift-rest-client/commit/14577a2))
+* **PVC:** add persistent volume claims methods and tests ([306d2b5](https://github.com/bucharest-gold/openshift-rest-client/commit/306d2b5))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.1.1...v1.1.2) (2018-05-21)
 
