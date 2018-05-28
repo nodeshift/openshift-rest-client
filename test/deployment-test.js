@@ -169,11 +169,11 @@ test('remove - deployments - basic remove', (t) => {
   });
 });
 
-// test('remove - deploymentconfigs - remove - no deploymentconfig name', (t) => {
-//   openshiftRestClient(settings).then((client) => {
-//     client.deploymentconfigs.remove().catch((err) => {
-//       t.equal(err.message, 'Deployment Config Name is required', 'error message should return');
-//       t.end();
-//     });
-//   });
-// });
+test('remove - deployment - no deployment name', (t) => {
+  openshiftRestClient(settings).then((client) => {
+    client.deployments.remove().catch((err) => {
+      t.equal(err.message, 'Deployment Name is required', 'error message should return');
+      t.end();
+    });
+  });
+});
