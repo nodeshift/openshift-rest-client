@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.3.0...v1.4.0) (2018-06-05)
+
+
+### Bug Fixes
+
+* travis-ci should use npm install instead of npm ci ([#74](https://github.com/bucharest-gold/openshift-rest-client/issues/74)) ([5d7b59b](https://github.com/bucharest-gold/openshift-rest-client/commit/5d7b59b))
+
+
+### Features
+
+* **ingress:** Expose the Ingress api. ([#77](https://github.com/bucharest-gold/openshift-rest-client/issues/77)) ([c80b457](https://github.com/bucharest-gold/openshift-rest-client/commit/c80b457)), closes [#73](https://github.com/bucharest-gold/openshift-rest-client/issues/73)
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.2.0...v1.3.0) (2018-05-24)
 
