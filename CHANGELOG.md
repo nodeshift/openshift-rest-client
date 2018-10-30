@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.4.0...v1.5.0) (2018-10-30)
+
+
+### Features
+
+* **imagestreamtags:** add resource ([#90](https://github.com/bucharest-gold/openshift-rest-client/issues/90)) ([fbbf390](https://github.com/bucharest-gold/openshift-rest-client/commit/fbbf390))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/bucharest-gold/openshift-rest-client/compare/v1.3.0...v1.4.0) (2018-06-05)
 
