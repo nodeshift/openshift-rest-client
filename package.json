@@ -36,9 +36,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "bucharest-gold/openshift-rest-client"
+    "url": "nodeshift/openshift-rest-client"
   },
-  "bugs": "https://github.com/bucharest-gold/openshift-rest-client/issues",
+  "bugs": "https://github.com/nodeshift/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
     "openshift-config-loader": "^0.4.0",
