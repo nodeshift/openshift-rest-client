@@ -50,3 +50,31 @@ You can pass in a custom config object by using the `settings` object
       });
     });
 
+If you don't have an OpenShift access token, you can use basic authentication by providing username and password as follows:
+    
+    const openshiftRestClient = require('openshift-rest-client');
+    const settings = {};
+
+    const customConfig = {
+      apiVersion: 'v1',
+      context:
+      { cluster: '192-168-99-100:8443',
+        namespace: 'for-node-client-testing',
+        user: 'developer/192-168-99-100:8443' },
+      user: { 
+        username: yourUsername,
+        password: youPassword 
+      },
+      cluster: 'https://192.168.99.100:8443' }
+    };
+
+    settings.config = customConfig;
+
+    openshiftRestClient(settings).then((client) => {
+      // Use the client object to find a list of projects, for example
+      client.projects.findAll().then((projects) => {
+        console.log(projects);
+      });
+    });
+
+
