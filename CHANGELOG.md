@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/nodeshift/openshift-rest-client/compare/v1.5.0...v1.6.0) (2018-11-29)
+
+
+### Features
+
+* add basic authentication option when the token is not provided in user config  ([#92](https://github.com/nodeshift/openshift-rest-client/issues/92)) ([f5778b9](https://github.com/nodeshift/openshift-rest-client/commit/f5778b9)), closes [#89](https://github.com/nodeshift/openshift-rest-client/issues/89)
+* Add ServiceInstance resource ([#96](https://github.com/nodeshift/openshift-rest-client/issues/96)) ([6f9b197](https://github.com/nodeshift/openshift-rest-client/commit/6f9b197))
+* Add StatefulSet resource ([#93](https://github.com/nodeshift/openshift-rest-client/issues/93)) ([e154ef6](https://github.com/nodeshift/openshift-rest-client/commit/e154ef6))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/nodeshift/openshift-rest-client/compare/v1.4.0...v1.5.0) (2018-10-30)
 
