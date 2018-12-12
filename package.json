@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "eslint lib/*.js test/*.js index.js",
     "test": "tape test/*-test.js | tap-spec",
-    "prepare": "nsp check",
     "coverage": "nyc npm test",
     "coverage:html": "nyc npm test && nyc report --reporter=html",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
