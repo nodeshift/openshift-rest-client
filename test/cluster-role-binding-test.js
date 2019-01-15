@@ -26,7 +26,7 @@ test('find - clusterrolebindings - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/clusterrolebindings`)
-      .reply(200, {kind: 'ClusterRoleBindingList'});
+      .reply(200, { kind: 'ClusterRoleBindingList' });
 
     const findResult = client.clusterrolebindings.findAll().then((clusterRoleBindingList) => {
       t.equal(clusterRoleBindingList.kind, 'ClusterRoleBindingList', 'returns an object with ClusterRoleBindingList');
@@ -47,7 +47,7 @@ test('find - clusterrolebindings - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/clusterrolebindings/${clusterRoleBindingName}`)
-      .reply(200, {kind: 'ClusterRoleBinding'});
+      .reply(200, { kind: 'ClusterRoleBinding' });
 
     const findResult = client.clusterrolebindings.find(clusterRoleBindingName).then((clusterrolebinding) => {
       t.equal(clusterrolebinding.kind, 'ClusterRoleBinding', 'returns an object with ClusterRoleBinding');
@@ -79,7 +79,7 @@ test('create - clusterrolebinding', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/clusterrolebindings`)
-      .reply(200, {kind: 'ClusterRoleBinding'});
+      .reply(200, { kind: 'ClusterRoleBinding' });
 
     const createResult = client.clusterrolebindings.create(clusterrolebinding).then((clusterrolebinding) => {
       t.equal(clusterrolebinding.kind, 'ClusterRoleBinding', 'returns an object with ClusterRoleBinding');
@@ -100,7 +100,7 @@ test('remove - clusterrolebindings - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/clusterrolebindings/${clusterRoleBindingName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.clusterrolebindings.remove(clusterRoleBindingName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

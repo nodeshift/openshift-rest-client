@@ -26,7 +26,7 @@ test('find - imagestreamtags - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags`)
-      .reply(200, {kind: 'ImageStreamTagList'});
+      .reply(200, { kind: 'ImageStreamTagList' });
 
     const findResult = client.imagestreamtags.findAll().then((imageStreamTagList) => {
       t.equal(imageStreamTagList.kind, 'ImageStreamTagList', 'returns an object with ImageStreamTagList');
@@ -47,7 +47,7 @@ test('find - imagestreamtags - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags/${imageStreamTagName}`)
-      .reply(200, {kind: 'ImageStreamTag'});
+      .reply(200, { kind: 'ImageStreamTag' });
 
     const findResult = client.imagestreamtags.find(imageStreamTagName).then((imagestreamtag) => {
       t.equal(imagestreamtag.kind, 'ImageStreamTag', 'returns an object with ImageStreamTag');
@@ -79,7 +79,7 @@ test('create - imagestreamtag', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags`)
-      .reply(200, {kind: 'ImageStreamTag'});
+      .reply(200, { kind: 'ImageStreamTag' });
 
     const createResult = client.imagestreamtags.create(imagestreamtag).then((imagestreamtag) => {
       t.equal(imagestreamtag.kind, 'ImageStreamTag', 'returns an object with ImageStreamTag');
@@ -103,7 +103,7 @@ test('update - imagestreamtag', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags/${imageStreamTagName}`)
-      .reply(200, {kind: 'ImageStreamTag'});
+      .reply(200, { kind: 'ImageStreamTag' });
 
     const createResult = client.imagestreamtags.update(imageStreamTagName, imagestreamtag).then((imagestreamtag) => {
       t.equal(imagestreamtag.kind, 'ImageStreamTag', 'returns an object with ImageStreamTag');
@@ -132,7 +132,7 @@ test('remove - imagestreamtags - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.imagestreamtags.removeAll().then((imageStreamTagList) => {
       t.equal(imageStreamTagList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - imagestreamtags - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreamtags/${imageStreamTagName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.imagestreamtags.remove(imageStreamTagName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

@@ -26,7 +26,7 @@ test('find - secrets - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets`)
-      .reply(200, {kind: 'SecretList'});
+      .reply(200, { kind: 'SecretList' });
 
     const findResult = client.secrets.findAll().then((secretsList) => {
       t.equal(secretsList.kind, 'SecretList', 'returns an object with SecretList');
@@ -47,7 +47,7 @@ test('find - secrets - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets/${secretName}`)
-      .reply(200, {kind: 'Secret'});
+      .reply(200, { kind: 'Secret' });
 
     const findResult = client.secrets.find(secretName).then((secret) => {
       t.equal(secret.kind, 'Secret', 'returns an object with Secret');
@@ -79,7 +79,7 @@ test('create - secret', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets`)
-      .reply(200, {kind: 'Secret'});
+      .reply(200, { kind: 'Secret' });
 
     const createResult = client.secrets.create(secret).then((secret) => {
       t.equal(secret.kind, 'Secret', 'returns an object with Secret');
@@ -103,7 +103,7 @@ test('update - secret', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets/${secretName}`)
-      .reply(200, {kind: 'Secret'});
+      .reply(200, { kind: 'Secret' });
 
     const createResult = client.secrets.update(secretName, secret).then((secret) => {
       t.equal(secret.kind, 'Secret', 'returns an object with Secret');
@@ -132,7 +132,7 @@ test('remove - secrets - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets`)
-      .reply(200, {kind: 'SecretList'});
+      .reply(200, { kind: 'SecretList' });
 
     // Note: https://docs.openshift.org/latest/rest_api/kubernetes_v1.html#delete-collection-of-secret says it return a Status object
     // but it really returns a SecretList object,  possible doc error?
@@ -155,7 +155,7 @@ test('remove - secrets - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/secrets/${secretName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.secrets.remove(secretName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

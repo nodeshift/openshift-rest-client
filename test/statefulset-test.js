@@ -26,7 +26,7 @@ test('find - statefulsets - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/apis/apps/v1beta1/namespaces/${clientConfig.context.namespace}/statefulsets`)
-      .reply(200, {kind: 'StatefulSetList'});
+      .reply(200, { kind: 'StatefulSetList' });
 
     const findResult = client.statefulsets.findAll().then((statefulSetList) => {
       t.equal(statefulSetList.kind, 'StatefulSetList', 'returns an object with StatefulSetList');
@@ -47,7 +47,7 @@ test('find - statefulsets - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/apis/apps/v1beta1/namespaces/${clientConfig.context.namespace}/statefulsets/${statefulSetName}`)
-      .reply(200, {kind: 'StatefulSet'});
+      .reply(200, { kind: 'StatefulSet' });
 
     const findResult = client.statefulsets.find(statefulSetName).then((statefulset) => {
       t.equal(statefulset.kind, 'StatefulSet', 'returns an object with StatefulSet');
@@ -81,7 +81,7 @@ test('create - statefulset', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/apis/apps/v1beta1/namespaces/${clientConfig.context.namespace}/statefulsets`)
-      .reply(200, {kind: 'StatefulSet'});
+      .reply(200, { kind: 'StatefulSet' });
 
     const createResult = client.statefulsets.create(statefulset).then((statefulset) => {
       t.equal(statefulset.kind, 'StatefulSet', 'returns an object with StatefulSet');
@@ -106,7 +106,7 @@ test('update - statefulset', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(url)
-      .reply(200, {kind: 'StatefulSet'});
+      .reply(200, { kind: 'StatefulSet' });
 
     const createResult = client.statefulsets.update(statefulSetName, statefulSet).then(updated => {
       t.equal(updated.kind, 'StatefulSet', 'returns an object with StatefulSet');
@@ -136,7 +136,7 @@ test('remove - statefulsets - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.statefulsets.removeAll().then(statefulSetList => {
       t.equal(statefulSetList.kind, 'Status', 'returns an object with Status');
@@ -158,7 +158,7 @@ test('remove - statefulsets - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.statefulsets.remove(statefulSetName).then(status => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

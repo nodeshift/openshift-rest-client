@@ -26,7 +26,7 @@ test('find - groups - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/groups`)
-      .reply(200, {kind: 'GroupList'});
+      .reply(200, { kind: 'GroupList' });
 
     const findResult = client.groups.findAll().then((groupList) => {
       t.equal(groupList.kind, 'GroupList', 'returns an object with GroupList');
@@ -47,7 +47,7 @@ test('find - groups - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/groups/${groupName}`)
-      .reply(200, {kind: 'Group'});
+      .reply(200, { kind: 'Group' });
 
     const findResult = client.groups.find(groupName).then((group) => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
@@ -79,7 +79,7 @@ test('create - group', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/groups`)
-      .reply(200, {kind: 'Group'});
+      .reply(200, { kind: 'Group' });
 
     const createResult = client.groups.create(group).then((group) => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
@@ -103,7 +103,7 @@ test('update - group', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/groups/${groupName}`)
-      .reply(200, {kind: 'Group'});
+      .reply(200, { kind: 'Group' });
 
     const createResult = client.groups.update(groupName, group).then((group) => {
       t.equal(group.kind, 'Group', 'returns an object with Group');
@@ -133,7 +133,7 @@ test('remove - groups - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/groups`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.groups.removeAll().then((groupList) => {
       t.equal(groupList.kind, 'Status', 'returns an object with Status');
@@ -154,7 +154,7 @@ test('remove - groups - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/groups/${groupName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.groups.remove(groupName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

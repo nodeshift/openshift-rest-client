@@ -26,7 +26,7 @@ test('find - deployments - basic findAll', (t) => {
 
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
-      .get(url).reply(200, {kind: 'DeploymentList'});
+      .get(url).reply(200, { kind: 'DeploymentList' });
 
     const findResult = client.deployments.findAll().then(deploymentList => {
       t.equal(deploymentList.kind, 'DeploymentList', 'returns an object with DeploymentList');
@@ -48,7 +48,7 @@ test('find - deployments - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(url)
-      .reply(200, {kind: 'Deployment'});
+      .reply(200, { kind: 'Deployment' });
 
     const findResult = client.deployments.find(deploymentName).then(deployment => {
       t.equal(deployment.kind, 'Deployment', 'returns an object with DeploymentConfig');
@@ -81,7 +81,7 @@ test('create - deployment', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(url)
-      .reply(200, {kind: 'Deployment'});
+      .reply(200, { kind: 'Deployment' });
 
     const createResult = client.deployments.create(deployment).then(deployment => {
       t.equal(deployment.kind, 'Deployment', 'returns an object with Deployment');
@@ -106,7 +106,7 @@ test('update - deployment', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(url)
-      .reply(200, {kind: 'Deployment'});
+      .reply(200, { kind: 'Deployment' });
 
     const createResult = client.deployments.update(deploymentName, deployment).then(updated => {
       t.equal(updated.kind, 'Deployment', 'returns an object with Deployment');
@@ -136,7 +136,7 @@ test('remove - deployments - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.deployments.removeAll().then(deploymentList => {
       t.equal(deploymentList.kind, 'Status', 'returns an object with Status');
@@ -158,7 +158,7 @@ test('remove - deployments - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.deployments.remove(deploymentName).then(status => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

@@ -26,7 +26,7 @@ test('find - services - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/services`)
-      .reply(200, {kind: 'ServiceList'});
+      .reply(200, { kind: 'ServiceList' });
 
     const findResult = client.services.findAll().then((serviceList) => {
       t.equal(serviceList.kind, 'ServiceList', 'returns an object with ServiceList');
@@ -47,7 +47,7 @@ test('find - services - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/services/${serviceName}`)
-      .reply(200, {kind: 'Service'});
+      .reply(200, { kind: 'Service' });
 
     const findResult = client.services.find(serviceName).then((service) => {
       t.equal(service.kind, 'Service', 'returns an object with Service');
@@ -79,7 +79,7 @@ test('create - service', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/services`)
-      .reply(200, {kind: 'Service'});
+      .reply(200, { kind: 'Service' });
 
     const createResult = client.services.create(service).then((service) => {
       t.equal(service.kind, 'Service', 'returns an object with Service');
@@ -103,7 +103,7 @@ test('update - service', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/services/${serviceName}`)
-      .reply(200, {kind: 'Service'});
+      .reply(200, { kind: 'Service' });
 
     const createResult = client.services.update(serviceName, service).then((service) => {
       t.equal(service.kind, 'Service', 'returns an object with Service');
@@ -132,7 +132,7 @@ test('remove - services - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/services`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.services.removeAll().then((serviceList) => {
       t.equal(serviceList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - services - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/services/${serviceName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.services.remove(serviceName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

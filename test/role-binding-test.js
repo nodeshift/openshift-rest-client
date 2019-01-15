@@ -26,7 +26,7 @@ test('find - rolebindings - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings`)
-      .reply(200, {kind: 'RoleBindingList'});
+      .reply(200, { kind: 'RoleBindingList' });
 
     const findResult = client.rolebindings.findAll().then((roleBindingList) => {
       t.equal(roleBindingList.kind, 'RoleBindingList', 'returns an object with RoleBindingList');
@@ -47,7 +47,7 @@ test('find - rolebindings - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings/${roleBindingName}`)
-      .reply(200, {kind: 'RoleBinding'});
+      .reply(200, { kind: 'RoleBinding' });
 
     const findResult = client.rolebindings.find(roleBindingName).then((rolebinding) => {
       t.equal(rolebinding.kind, 'RoleBinding', 'returns an object with RoleBinding');
@@ -79,7 +79,7 @@ test('create - rolebinding', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings`)
-      .reply(200, {kind: 'RoleBinding'});
+      .reply(200, { kind: 'RoleBinding' });
 
     const createResult = client.rolebindings.create(rolebinding).then((rolebinding) => {
       t.equal(rolebinding.kind, 'RoleBinding', 'returns an object with RoleBinding');
@@ -103,7 +103,7 @@ test('update - rolebinding', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings/${roleBindingName}`)
-      .reply(200, {kind: 'RoleBinding'});
+      .reply(200, { kind: 'RoleBinding' });
 
     const createResult = client.rolebindings.update(roleBindingName, rolebinding).then((rolebinding) => {
       t.equal(rolebinding.kind, 'RoleBinding', 'returns an object with RoleBinding');
@@ -132,7 +132,7 @@ test('remove - rolebindings - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.rolebindings.removeAll().then((roleBindingList) => {
       t.equal(roleBindingList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - rolebindings - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/rolebindings/${roleBindingName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.rolebindings.remove(roleBindingName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

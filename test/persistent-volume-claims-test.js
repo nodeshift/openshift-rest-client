@@ -26,7 +26,7 @@ test('find - persistent volume claims - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims`)
-      .reply(200, {kind: 'List'});
+      .reply(200, { kind: 'List' });
 
     const findResult = client.persistentvolumeclaims.findAll().then((pvcList) => {
       t.equal(pvcList.kind, 'List', 'returns an object with List');
@@ -47,7 +47,7 @@ test('find - persistent volume claims - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims/${pvcName}`)
-      .reply(200, {kind: 'PersistentVolumeClaim'});
+      .reply(200, { kind: 'PersistentVolumeClaim' });
 
     const findResult = client.persistentvolumeclaims.find(pvcName).then((pvc) => {
       t.equal(pvc.kind, 'PersistentVolumeClaim', 'returns an object with PersistentVolumeClaim');
@@ -80,7 +80,7 @@ test('create - persistent volume claims', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims`)
-      .reply(200, {kind: 'PersistentVolumeClaim'});
+      .reply(200, { kind: 'PersistentVolumeClaim' });
 
     const createResult = client.persistentvolumeclaims.create(pvc).then((opvc) => {
       t.equal(opvc.kind, 'PersistentVolumeClaim', 'returns an object with PersistentVolumeClaims');
@@ -104,7 +104,7 @@ test('update - persistent volume claims', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims/${pvcName}`)
-      .reply(200, {kind: 'PersistentVolumeClaim'});
+      .reply(200, { kind: 'PersistentVolumeClaim' });
 
     const createResult = client.persistentvolumeclaims.update(pvcName, pvc).then((opvc) => {
       t.equal(opvc.kind, 'PersistentVolumeClaim', 'returns an object with PersistentVolumeClaim');
@@ -133,7 +133,7 @@ test('remove - persistent volume claims - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.persistentvolumeclaims.removeAll().then((rresult) => {
       t.equal(rresult.kind, 'Status', 'returns an object with Status');
@@ -154,7 +154,7 @@ test('remove - persistent volume claims - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/persistentvolumeclaims/${pvcName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.persistentvolumeclaims.remove(pvcName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

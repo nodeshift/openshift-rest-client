@@ -26,7 +26,7 @@ test('find - projects - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/projects`)
-      .reply(200, {kind: 'ProjectList'});
+      .reply(200, { kind: 'ProjectList' });
 
     const findResult = client.projects.findAll().then((projectList) => {
       t.equal(projectList.kind, 'ProjectList', 'returns an object with ProjectList');
@@ -47,7 +47,7 @@ test('find - projects - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/projects/${projectName}`)
-      .reply(200, {kind: 'Project'});
+      .reply(200, { kind: 'Project' });
 
     const findResult = client.projects.find(projectName).then((project) => {
       t.equal(project.kind, 'Project', 'returns an object with Project');
@@ -79,7 +79,7 @@ test('create - project', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/projects`)
-      .reply(200, {kind: 'Project'});
+      .reply(200, { kind: 'Project' });
 
     const createResult = client.projects.create(project).then((project) => {
       t.equal(project.kind, 'Project', 'returns an object with Project');
@@ -103,7 +103,7 @@ test('update - project', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/projects/${projectName}`)
-      .reply(200, {kind: 'Project'});
+      .reply(200, { kind: 'Project' });
 
     const createResult = client.projects.update(projectName, project).then((project) => {
       t.equal(project.kind, 'Project', 'returns an object with Project');
@@ -132,7 +132,7 @@ test('remove - projects - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/projects`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.projects.removeAll().then((projectList) => {
       t.equal(projectList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - projects - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/projects/${projectName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.projects.remove(projectName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

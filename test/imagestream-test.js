@@ -26,7 +26,7 @@ test('find - imagestreams - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams`)
-      .reply(200, {kind: 'ImageStreamList'});
+      .reply(200, { kind: 'ImageStreamList' });
 
     const findResult = client.imagestreams.findAll().then((imageStreamList) => {
       t.equal(imageStreamList.kind, 'ImageStreamList', 'returns an object with ImageStreamList');
@@ -47,7 +47,7 @@ test('find - imagestreams - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams/${imageStreamName}`)
-      .reply(200, {kind: 'ImageStream'});
+      .reply(200, { kind: 'ImageStream' });
 
     const findResult = client.imagestreams.find(imageStreamName).then((imagestream) => {
       t.equal(imagestream.kind, 'ImageStream', 'returns an object with ImageStream');
@@ -79,7 +79,7 @@ test('create - imagestream', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams`)
-      .reply(200, {kind: 'ImageStream'});
+      .reply(200, { kind: 'ImageStream' });
 
     const createResult = client.imagestreams.create(imagestream).then((imagestream) => {
       t.equal(imagestream.kind, 'ImageStream', 'returns an object with ImageStream');
@@ -103,7 +103,7 @@ test('update - imagestream', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams/${imageStreamName}`)
-      .reply(200, {kind: 'ImageStream'});
+      .reply(200, { kind: 'ImageStream' });
 
     const createResult = client.imagestreams.update(imageStreamName, imagestream).then((imagestream) => {
       t.equal(imagestream.kind, 'ImageStream', 'returns an object with ImageStream');
@@ -132,7 +132,7 @@ test('remove - imagestreams - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.imagestreams.removeAll().then((imageStreamList) => {
       t.equal(imageStreamList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - imagestreams - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/imagestreams/${imageStreamName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.imagestreams.remove(imageStreamName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');
