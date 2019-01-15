@@ -26,7 +26,7 @@ test('find - events - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/events`)
-      .reply(200, {kind: 'List'});
+      .reply(200, { kind: 'List' });
 
     const findResult = client.events.findAll().then((evtList) => {
       t.equal(evtList.kind, 'List', 'returns an object with List');
@@ -47,7 +47,7 @@ test('find - events - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/events/${evtName}`)
-      .reply(200, {kind: 'Event'});
+      .reply(200, { kind: 'Event' });
 
     const findResult = client.events.find(evtName).then((evt) => {
       t.equal(evt.kind, 'Event', 'returns an object with Event');

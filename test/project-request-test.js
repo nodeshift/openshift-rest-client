@@ -26,7 +26,7 @@ test('find - projectrequests - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/projectrequests`)
-      .reply(200, {kind: 'ProjectRequestList'});
+      .reply(200, { kind: 'ProjectRequestList' });
 
     const findResult = client.projectrequests.findAll().then((projectRequestList) => {
       t.equal(projectRequestList.kind, 'ProjectRequestList', 'returns an object with ProjectRequestList');
@@ -49,7 +49,7 @@ test('create - projectrequest', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/projectrequests`)
-      .reply(200, {kind: 'ProjectRequest'});
+      .reply(200, { kind: 'ProjectRequest' });
 
     const createResult = client.projectrequests.create(projectrequest).then((projectrequest) => {
       t.equal(projectrequest.kind, 'ProjectRequest', 'returns an object with ProjectRequest');

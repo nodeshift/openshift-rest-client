@@ -26,7 +26,7 @@ test('find - configmaps - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps`)
-      .reply(200, {kind: 'ConfigMapList'});
+      .reply(200, { kind: 'ConfigMapList' });
 
     const findResult = client.configmaps.findAll().then((configMapList) => {
       t.equal(configMapList.kind, 'ConfigMapList', 'returns an object with ConfigMapList');
@@ -47,7 +47,7 @@ test('find - configmaps - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps/${configMapName}`)
-      .reply(200, {kind: 'ConfigMap'});
+      .reply(200, { kind: 'ConfigMap' });
 
     const findResult = client.configmaps.find(configMapName).then((configmap) => {
       t.equal(configmap.kind, 'ConfigMap', 'returns an object with ConfigMap');
@@ -79,7 +79,7 @@ test('create - configmap', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps`)
-      .reply(200, {kind: 'ConfigMap'});
+      .reply(200, { kind: 'ConfigMap' });
 
     const createResult = client.configmaps.create(configmap).then((configmap) => {
       t.equal(configmap.kind, 'ConfigMap', 'returns an object with ConfigMap');
@@ -103,7 +103,7 @@ test('update - configmap', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps/${configMapName}`)
-      .reply(200, {kind: 'ConfigMap'});
+      .reply(200, { kind: 'ConfigMap' });
 
     const createResult = client.configmaps.update(configMapName, configmap).then((configmap) => {
       t.equal(configmap.kind, 'ConfigMap', 'returns an object with ConfigMap');
@@ -132,7 +132,7 @@ test('remove - configmaps - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.configmaps.removeAll().then((configMapList) => {
       t.equal(configMapList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - configmaps - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/configmaps/${configMapName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.configmaps.remove(configMapName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

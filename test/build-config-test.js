@@ -26,7 +26,7 @@ test('find - buildconfigs - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs`)
-      .reply(200, {kind: 'BuildConfigList'});
+      .reply(200, { kind: 'BuildConfigList' });
 
     const findResult = client.buildconfigs.findAll().then((buildConfigList) => {
       t.equal(buildConfigList.kind, 'BuildConfigList', 'returns an object with BuildConfigList');
@@ -47,7 +47,7 @@ test('find - buildconfigs - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}`)
-      .reply(200, {kind: 'BuildConfig'});
+      .reply(200, { kind: 'BuildConfig' });
 
     const findResult = client.buildconfigs.find(buildConfigName).then((buildconfig) => {
       t.equal(buildconfig.kind, 'BuildConfig', 'returns an object with BuildConfig');
@@ -79,7 +79,7 @@ test('create - buildconfig', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs`)
-      .reply(200, {kind: 'BuildConfig'});
+      .reply(200, { kind: 'BuildConfig' });
 
     const createResult = client.buildconfigs.create(buildconfig).then((buildconfig) => {
       t.equal(buildconfig.kind, 'BuildConfig', 'returns an object with BuildConfig');
@@ -103,7 +103,7 @@ test('update - buildconfig', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}`)
-      .reply(200, {kind: 'BuildConfig'});
+      .reply(200, { kind: 'BuildConfig' });
 
     const createResult = client.buildconfigs.update(buildConfigName, buildconfig).then((buildconfig) => {
       t.equal(buildconfig.kind, 'BuildConfig', 'returns an object with BuildConfig');
@@ -132,7 +132,7 @@ test('remove - buildconfigs - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.buildconfigs.removeAll().then((buildConfigList) => {
       t.equal(buildConfigList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - buildconfigs - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.buildconfigs.remove(buildConfigName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');
@@ -183,7 +183,7 @@ test('instantiate - buildconfig', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiate`)
-      .reply(200, {kind: 'BuildRequest'});
+      .reply(200, { kind: 'BuildRequest' });
 
     const instantiateResult = client.buildconfigs.instantiate(buildConfigName).then((buildrequest) => {
       t.equal(buildrequest.kind, 'BuildRequest', 'returns an object with BuildRequest');
@@ -213,7 +213,7 @@ test('instantiateBinary - buildconfig', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/buildconfigs/${buildConfigName}/instantiatebinary`)
-      .reply(200, {kind: 'BinaryBuildRequest'});
+      .reply(200, { kind: 'BinaryBuildRequest' });
 
     const instantiateBinaryResult = client.buildconfigs.instantiateBinary(buildConfigName).then((binarybuildrequest) => {
       t.equal(binarybuildrequest.kind, 'BinaryBuildRequest', 'returns an object with BinaryBuildRequest');

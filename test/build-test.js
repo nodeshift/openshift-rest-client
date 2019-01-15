@@ -26,7 +26,7 @@ test('find - builds - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds`)
-      .reply(200, {kind: 'BuildList'});
+      .reply(200, { kind: 'BuildList' });
 
     const findResult = client.builds.findAll().then((buildList) => {
       t.equal(buildList.kind, 'BuildList', 'returns an object with BuildList');
@@ -47,7 +47,7 @@ test('find - builds - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds/${buildName}`)
-      .reply(200, {kind: 'Build'});
+      .reply(200, { kind: 'Build' });
 
     const findResult = client.builds.find(buildName).then((build) => {
       t.equal(build.kind, 'Build', 'returns an object with Build');
@@ -79,7 +79,7 @@ test('create - build', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds`)
-      .reply(200, {kind: 'Build'});
+      .reply(200, { kind: 'Build' });
 
     const createResult = client.builds.create(build).then((build) => {
       t.equal(build.kind, 'Build', 'returns an object with Build');
@@ -103,7 +103,7 @@ test('update - build', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds/${buildName}`)
-      .reply(200, {kind: 'Build'});
+      .reply(200, { kind: 'Build' });
 
     const createResult = client.builds.update(buildName, build).then((build) => {
       t.equal(build.kind, 'Build', 'returns an object with Build');
@@ -132,7 +132,7 @@ test('remove - builds - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.builds.removeAll().then((buildList) => {
       t.equal(buildList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - builds - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/builds/${buildName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.builds.remove(buildName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

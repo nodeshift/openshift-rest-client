@@ -26,7 +26,7 @@ test('find - routes - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes`)
-      .reply(200, {kind: 'RouteList'});
+      .reply(200, { kind: 'RouteList' });
 
     const findResult = client.routes.findAll().then((routeList) => {
       t.equal(routeList.kind, 'RouteList', 'returns an object with RouteList');
@@ -47,7 +47,7 @@ test('find - routes - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes/${routeName}`)
-      .reply(200, {kind: 'Route'});
+      .reply(200, { kind: 'Route' });
 
     const findResult = client.routes.find(routeName).then((route) => {
       t.equal(route.kind, 'Route', 'returns an object with Route');
@@ -79,7 +79,7 @@ test('create - route', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes`)
-      .reply(200, {kind: 'Route'});
+      .reply(200, { kind: 'Route' });
 
     const createResult = client.routes.create(route).then((route) => {
       t.equal(route.kind, 'Route', 'returns an object with Route');
@@ -103,7 +103,7 @@ test('update - route', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes/${routeName}`)
-      .reply(200, {kind: 'Route'});
+      .reply(200, { kind: 'Route' });
 
     const createResult = client.routes.update(routeName, route).then((route) => {
       t.equal(route.kind, 'Route', 'returns an object with Route');
@@ -132,7 +132,7 @@ test('remove - routes - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.routes.removeAll().then((routeList) => {
       t.equal(routeList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - routes - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/oapi/v1/namespaces/${clientConfig.context.namespace}/routes/${routeName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.routes.remove(routeName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

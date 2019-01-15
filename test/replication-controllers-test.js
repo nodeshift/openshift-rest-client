@@ -26,7 +26,7 @@ test('find - replicationcontrollers - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
-      .reply(200, {kind: 'ReplicationControllerList'});
+      .reply(200, { kind: 'ReplicationControllerList' });
 
     const findResult = client.replicationcontrollers.findAll().then((replicationControllerList) => {
       t.equal(replicationControllerList.kind, 'ReplicationControllerList', 'returns an object with ReplicationControllerList');
@@ -47,7 +47,7 @@ test('find - replicationcontrollers - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers/${replicationControllerName}`)
-      .reply(200, {kind: 'ReplicationController'});
+      .reply(200, { kind: 'ReplicationController' });
 
     const findResult = client.replicationcontrollers.find(replicationControllerName).then((replicationcontroller) => {
       t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
@@ -79,7 +79,7 @@ test('create - replicationcontroller', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
-      .reply(200, {kind: 'ReplicationController'});
+      .reply(200, { kind: 'ReplicationController' });
 
     const createResult = client.replicationcontrollers.create(replicationcontroller).then((replicationcontroller) => {
       t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
@@ -103,7 +103,7 @@ test('update - replicationcontroller', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers/${replicationControllerName}`)
-      .reply(200, {kind: 'ReplicationController'});
+      .reply(200, { kind: 'ReplicationController' });
 
     const createResult = client.replicationcontrollers.update(replicationControllerName, replicationcontroller).then((replicationcontroller) => {
       t.equal(replicationcontroller.kind, 'ReplicationController', 'returns an object with ReplicationController');
@@ -132,7 +132,7 @@ test('remove - replicationcontrollers - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.replicationcontrollers.removeAll().then((replicationControllerList) => {
       t.equal(replicationControllerList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - replicationcontrollers - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/replicationcontrollers/${replicationControllerName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.replicationcontrollers.remove(replicationControllerName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

@@ -26,7 +26,7 @@ test('find - ingress - basic findAll', (t) => {
 
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
-      .get(url).reply(200, {kind: 'IngressList'});
+      .get(url).reply(200, { kind: 'IngressList' });
 
     const findResult = client.ingress.findAll().then(ingressList => {
       t.equal(ingressList.kind, 'IngressList', 'returns an object with IngressList');
@@ -48,7 +48,7 @@ test('find - ingress - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(url)
-      .reply(200, {kind: 'Ingress'});
+      .reply(200, { kind: 'Ingress' });
 
     const findResult = client.ingress.find(ingressName).then(ingress => {
       t.equal(ingress.kind, 'Ingress', 'returns an object with Ingress');
@@ -81,7 +81,7 @@ test('create - ingress', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(url)
-      .reply(200, {kind: 'Ingress'});
+      .reply(200, { kind: 'Ingress' });
 
     const createResult = client.ingress.create(ingress).then(ingress => {
       t.equal(ingress.kind, 'Ingress', 'returns an object with Ingress');
@@ -106,7 +106,7 @@ test('update - ingress', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(url)
-      .reply(200, {kind: 'Ingress'});
+      .reply(200, { kind: 'Ingress' });
 
     const createResult = client.ingress.update(ingressName, ingress).then(updated => {
       t.equal(updated.kind, 'Ingress', 'returns an object with Ingress');
@@ -136,7 +136,7 @@ test('remove - ingress - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.ingress.removeAll().then(ingressList => {
       t.equal(ingressList.kind, 'Status', 'returns an object with Status');
@@ -158,7 +158,7 @@ test('remove - ingress - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(url)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.ingress.remove(ingressName).then(status => {
       t.equal(status.kind, 'Status', 'returns an object with Status');

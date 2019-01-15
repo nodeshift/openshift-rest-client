@@ -190,7 +190,7 @@ test('test common request - Has a token - body error - as an object', (t) => {
     request: (requestObject, cb) => {
       return cb(null, {
         statusCode: 400
-      }, {message: 'This is the body error as an object'});
+      }, { message: 'This is the body error as an object' });
     }
   });
 

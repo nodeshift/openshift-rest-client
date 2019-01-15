@@ -26,7 +26,7 @@ test('find - pods - basic findAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/pods`)
-      .reply(200, {kind: 'PodList'});
+      .reply(200, { kind: 'PodList' });
 
     const findResult = client.pods.findAll().then((podsList) => {
       t.equal(podsList.kind, 'PodList', 'returns an object with PodList');
@@ -47,7 +47,7 @@ test('find - pods - basic find', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .get(`/api/v1/namespaces/${clientConfig.context.namespace}/pods/${podName}`)
-      .reply(200, {kind: 'Pod'});
+      .reply(200, { kind: 'Pod' });
 
     const findResult = client.pods.find(podName).then((pod) => {
       t.equal(pod.kind, 'Pod', 'returns an object with Pod');
@@ -79,7 +79,7 @@ test('create - pod', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .post(`/api/v1/namespaces/${clientConfig.context.namespace}/pods`)
-      .reply(200, {kind: 'Pod'});
+      .reply(200, { kind: 'Pod' });
 
     const createResult = client.pods.create(pod).then((pod) => {
       t.equal(pod.kind, 'Pod', 'returns an object with Pod');
@@ -103,7 +103,7 @@ test('update - pod', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .put(`/api/v1/namespaces/${clientConfig.context.namespace}/pods/${podName}`)
-      .reply(200, {kind: 'Pod'});
+      .reply(200, { kind: 'Pod' });
 
     const createResult = client.pods.update(podName, pod).then((pod) => {
       t.equal(pod.kind, 'Pod', 'returns an object with Pod');
@@ -132,7 +132,7 @@ test('remove - pods - basic removeAll', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/pods`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.pods.removeAll().then((podsList) => {
       t.equal(podsList.kind, 'Status', 'returns an object with Status');
@@ -153,7 +153,7 @@ test('remove - pods - basic remove', (t) => {
     nock(clientConfig.cluster)
       .matchHeader('authorization', `Bearer ${clientConfig.user.token}`) // taken from the config
       .delete(`/api/v1/namespaces/${clientConfig.context.namespace}/pods/${podName}`)
-      .reply(200, {kind: 'Status'});
+      .reply(200, { kind: 'Status' });
 
     const removeResult = client.pods.remove(podName).then((status) => {
       t.equal(status.kind, 'Status', 'returns an object with Status');
