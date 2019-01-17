@@ -27,54 +27,68 @@ Code:
 By default, the openshift-rest-client will use the [openshift-config-loader](https://www.npmjs.com/package/openshift-config-loader) module to get your openshift configuration.
 
 You can pass in a custom config object by using the `settings` object
+```
+const openshiftRestClient = require('openshift-rest-client');
+const settings = {};
 
-    const openshiftRestClient = require('openshift-rest-client');
-    const settings = {};
+const customConfig = {
+  apiVersion: 'v1',
+  context:
+  { cluster: '192-168-99-100:8443',
+    namespace: 'for-node-client-testing',
+    user: 'developer/192-168-99-100:8443' },
+  user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
+  cluster: 'https://192.168.99.100:8443' }
+};
 
-    const customConfig = {
-      apiVersion: 'v1',
-      context:
-      { cluster: '192-168-99-100:8443',
-        namespace: 'for-node-client-testing',
-        user: 'developer/192-168-99-100:8443' },
-      user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
-      cluster: 'https://192.168.99.100:8443' }
-    };
+settings.config = customConfig;
 
-    settings.config = customConfig;
+openshiftRestClient(settings).then((client) => {
+  // Use the client object to find a list of projects, for example
+  client.projects.findAll().then((projects) => {
+    console.log(projects);
+  });
+});
+```
+If you want to use another namespace, pass it as option, e.g.
 
-    openshiftRestClient(settings).then((client) => {
-      // Use the client object to find a list of projects, for example
-      client.projects.findAll().then((projects) => {
-        console.log(projects);
-      });
-    });
+```
+openshiftRestClient(settings).then((client) => {
+  client.routes.findAll({ namespace: 'test' }).then((routes) => {
+    console.log(routes);
+  });
+});
+
+```
+
 
 If you don't have an OpenShift access token, you can use basic authentication by providing username and password as follows:
-    
-    const openshiftRestClient = require('openshift-rest-client');
-    const settings = {};
+  
+```  
+const openshiftRestClient = require('openshift-rest-client');
+const settings = {};
 
-    const customConfig = {
-      apiVersion: 'v1',
-      context:
-      { cluster: '192-168-99-100:8443',
-        namespace: 'for-node-client-testing',
-        user: 'developer/192-168-99-100:8443' },
-      user: { 
-        username: yourUsername,
-        password: youPassword 
-      },
-      cluster: 'https://192.168.99.100:8443' }
-    };
+const customConfig = {
+  apiVersion: 'v1',
+  context:
+  { cluster: '192-168-99-100:8443',
+    namespace: 'for-node-client-testing',
+    user: 'developer/192-168-99-100:8443' },
+  user: { 
+    username: yourUsername,
+    password: youPassword 
+  },
+  cluster: 'https://192.168.99.100:8443' }
+};
 
-    settings.config = customConfig;
+settings.config = customConfig;
 
-    openshiftRestClient(settings).then((client) => {
-      // Use the client object to find a list of projects, for example
-      client.projects.findAll().then((projects) => {
-        console.log(projects);
-      });
-    });
+openshiftRestClient(settings).then((client) => {
+  // Use the client object to find a list of projects, for example
+  client.projects.findAll().then((projects) => {
+    console.log(projects);
+  });
+});
 
+```
 
