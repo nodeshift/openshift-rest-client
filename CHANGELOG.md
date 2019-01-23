@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.3...v1.6.4) (2019-01-23)
+
+
+### Bug Fixes
+
+* no cluster url should return a rejected Promise ([fa2a549](https://github.com/nodeshift/openshift-rest-client/commit/fa2a549))
+* Throw an error when there's no CLUSTER URL ([#108](https://github.com/nodeshift/openshift-rest-client/issues/108)) ([65093a3](https://github.com/nodeshift/openshift-rest-client/commit/65093a3))
+
+
+
 <a name="1.6.3"></a>
 ## [1.6.3](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.2...v1.6.3) (2019-01-15)
 
