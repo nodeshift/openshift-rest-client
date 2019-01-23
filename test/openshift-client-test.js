@@ -48,8 +48,59 @@ test('openshift client settings test', (t) => {
 
   osClient.then((client) => {
     t.ok(client.settings, 'client object should have a settings object');
-    console.log(client.settings);
     t.ok(client.settings.request, 'client object should have a settings.request object');
+    t.end();
+  });
+});
+
+test('openshift client config settings test', (t) => {
+  // Need to stub the config loader for these tests
+  const stubbedConfigLoader = (client) => {
+    return Promise.resolve(client);
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    './config-loader': stubbedConfigLoader
+  });
+
+  const settings = {
+    request: {
+      strictSSL: true
+    },
+    config: {
+      cluster: 'https://192.168.99.100:8443/'
+    }
+  };
+
+  const osClient = openshiftRestClient(settings);
+
+  osClient.then((client) => {
+    t.ok(client.settings.config.cluster, 'https://192.168.99.100:8443', 'should have the trailing slash removed');
+    t.end();
+  });
+});
+
+test('openshift client config settings test - no url', (t) => {
+  // Need to stub the config loader for these tests
+  const stubbedConfigLoader = (client) => {
+    return Promise.resolve(client);
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    './config-loader': stubbedConfigLoader
+  });
+
+  const settings = {
+    request: {
+      strictSSL: true
+    },
+    config: {}
+  };
+
+  const osClient = openshiftRestClient(settings);
+
+  osClient.catch(error => {
+    t.equal(error.message, 'Please provide an url of your OpenShift cluster in your configuration settings.', 'should have error message');
     t.end();
   });
 });
