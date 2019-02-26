@@ -18,4 +18,7 @@
  *
  */
 
-module.exports = exports = require('./lib/openshift-rest-client.js');
+module.exports = exports = {
+  OpenshiftClient: require('./lib/openshift-rest-client.js'),
+  config: require('kubernetes-client').config
+};

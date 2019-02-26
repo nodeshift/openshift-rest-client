@@ -3,104 +3,69 @@
 const test = require('tape');
 const proxyquire = require('proxyquire');
 
+test('openshift rest client', (t) => {
+  const openshiftRestClient = require('../');
+
+  t.ok(openshiftRestClient.OpenshiftClient, 'has the OpenshiftClient Object');
+  t.ok(openshiftRestClient.config, 'has the config Object');
+
+  t.end();
+});
+
 test('openshift client tests', (t) => {
   // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
+  const stubbedConfig = (client) => {
     return Promise.resolve(client);
   };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    './config-loader': stubbedConfigLoader
+    'kubernetes-client': {
+      config: {
+        fromKubeconfig: stubbedConfig
+      }
+    }
   });
 
   const osClient = openshiftRestClient();
   t.equal(osClient instanceof Promise, true, 'should return a Promise');
 
   osClient.then((client) => {
-    t.ok(client.projects, 'client object should have a projects object');
-    t.ok(client.buildconfigs, 'client object should have a buildconfigs object');
-    t.ok(client.services, 'client object should have a services object');
-    t.ok(client.deploymentconfigs, 'client object should have a deploymentconfigs object');
-    t.ok(client.events, 'client object should have a events object');
-    t.ok(client.persistentvolumeclaims, 'client object should have a persistentvolumeclaims object');
-    t.ok(client.routes, 'client object should have a routes object');
-    t.end();
-  });
-});
+    t.ok(client.apis['build.openshift.io'], 'client object should have a build object');
+    t.ok(client.apis.build, 'build object is aliased');
 
-test('openshift client settings test', (t) => {
-  // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
-    return Promise.resolve(client);
-  };
+    t.ok(client.apis['apps.openshift.io'], 'client object should have a apps object');
+    t.ok(client.apis.app, 'apps object is aliased to app');
 
-  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    './config-loader': stubbedConfigLoader
-  });
+    t.ok(client.apis['authorization.openshift.io'], 'client object should have a authorization object');
+    t.ok(client.apis.authorization, 'authorization object is aliased to authorization');
 
-  const settings = {
-    request: {
-      strictSSL: true
-    }
-  };
+    t.ok(client.apis['image.openshift.io'], 'client object should have a image object');
+    t.ok(client.apis.image, 'image object is aliased to image');
 
-  const osClient = openshiftRestClient(settings);
+    t.ok(client.apis['network.openshift.io'], 'client object should have a network object');
+    t.ok(client.apis.network, 'network object is aliased to network');
 
-  osClient.then((client) => {
-    t.ok(client.settings, 'client object should have a settings object');
-    t.ok(client.settings.request, 'client object should have a settings.request object');
-    t.end();
-  });
-});
+    t.ok(client.apis['oauth.openshift.io'], 'client object should have a oauth object');
+    t.ok(client.apis.oauth, 'oauth object is aliased to oauth');
 
-test('openshift client config settings test', (t) => {
-  // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
-    return Promise.resolve(client);
-  };
+    t.ok(client.apis['project.openshift.io'], 'client object should have a project object');
+    t.ok(client.apis.project, 'project object is aliased to project');
 
-  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    './config-loader': stubbedConfigLoader
-  });
+    t.ok(client.apis['quota.openshift.io'], 'client object should have a quota object');
+    t.ok(client.apis.quota, 'quota object is aliased to quota');
 
-  const settings = {
-    request: {
-      strictSSL: true
-    },
-    config: {
-      cluster: 'https://192.168.99.100:8443/'
-    }
-  };
+    t.ok(client.apis['route.openshift.io'], 'client object should have a route object');
+    t.ok(client.apis.route, 'route object is aliased to route');
 
-  const osClient = openshiftRestClient(settings);
+    t.ok(client.apis['security.openshift.io'], 'client object should have a security object');
+    t.ok(client.apis.security, 'security object is aliased to security');
 
-  osClient.then((client) => {
-    t.ok(client.settings.config.cluster, 'https://192.168.99.100:8443', 'should have the trailing slash removed');
-    t.end();
-  });
-});
+    t.ok(client.apis['template.openshift.io'], 'client object should have a template object');
+    t.ok(client.apis.template, 'template object is aliased to template');
 
-test('openshift client config settings test - no url', (t) => {
-  // Need to stub the config loader for these tests
-  const stubbedConfigLoader = (client) => {
-    return Promise.resolve(client);
-  };
+    t.ok(client.apis['user.openshift.io'], 'client object should have a user object');
+    t.ok(client.apis.user, 'user object is aliased to user');
 
-  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    './config-loader': stubbedConfigLoader
-  });
-
-  const settings = {
-    request: {
-      strictSSL: true
-    },
-    config: {}
-  };
-
-  const osClient = openshiftRestClient(settings);
-
-  osClient.catch(error => {
-    t.equal(error.message, 'Please provide an url of your OpenShift cluster in your configuration settings.', 'should have error message');
     t.end();
   });
 });
