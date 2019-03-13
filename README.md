@@ -12,69 +12,80 @@ Node.js based client for the Openshift REST API, not unlike the Fabric8 Maven Pl
 
 Code:
 
-    const openshiftRestClient = require('openshift-rest-client');
+    const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
 
     openshiftRestClient().then((client) => {
       // Use the client object to find a list of projects, for example
-      client.projects.findAll().then((projects) => {
-        console.log(projects);
+      client.apis['project.openshift.io'].v1.projects.get().then((response) => {
+        console.log(response.body);
       });
     });
 
+
+The openshift-rest-client translates Path Item Objects \[[1]\] (*e.g*.,
+`/apis/project.openshift.io/v1/projects`) to object chains ending in HTTP methods (*e.g.*,
+`apis['project.openshift.io'].v1.projects.get`).
+
+So, to fetch all Projects:
+
+```js
+const projects = await client.apis['project.openshift.io'].v1.projects.get()
+```
+
+The openshift-rest-client translates Path Templating \[[2]\] (*e.g.*,
+`/apis/build.openshift.io/v1/namespaces/$NAMESPACE/buildconfigs`) to function calls (*e.g.*,
+`apis['build.openshift.io'].v1.namespaces('default').buildconfigs`).
+
+So, to create a new Build Config in the default Namespace:
+
+```js
+const buildConfig = require('./build-config.json')
+const create = await client.apis['build.openshift.io'].v1.namespaces('default').buildconfigs.post({ body: buildConfig })
+```
+
+and then fetch your newly created Build Config:
+
+```js
+const deployment = await client.apis['build.openshift.io'].v1.namespaces('default').buildconfigs(buildConfig.metadata.name).get()
+```
+
+and finally, remove the Build Config:
+
+```js
+await client.apis['build.openshift.io'].v1.namespaces('default').buildconfigs(buildConfig.metadata.name).delete()
+```
+
+The openshift-rest-client supports `.delete`, `.get`, `.patch`, `.post`, and `.put`.
+
+There are also aliases defined, so instead of writing `client.apis['build.openshift.io']`, you can just use `client.apis.build` for example.  The list of aliases can be seen here: https://github.com/nodeshift/openshift-rest-client/blob/master/lib/openshift-rest-client.js
 
 ### Advanced Usage
 
-By default, the openshift-rest-client will use the [openshift-config-loader](https://www.npmjs.com/package/openshift-config-loader) module to get your openshift configuration.
+By default, the openshift-rest-client will use the [kubernetes-client](https://www.npmjs.com/package/kubernetes-client) module to get your configuration.
 
-You can pass in a custom config object by using the `settings` object
+The openshift-rest-client exposes the config module from the kubernetes client for ease of use.
 
-    const openshiftRestClient = require('openshift-rest-client');
-    const settings = {};
+For example, if you want to provide a different path to your configuration, you can do something like this:
 
-    const customConfig = {
-      apiVersion: 'v1',
-      context:
-      { cluster: '192-168-99-100:8443',
-        namespace: 'for-node-client-testing',
-        user: 'developer/192-168-99-100:8443' },
-      user: { token: 'zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U' },
-      cluster: 'https://192.168.99.100:8443' }
-    };
+    const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
+    const config = require('openshift-rest-client').config;
 
-    settings.config = customConfig;
+    const path '~/some/path/config';
+    const customConfig = config.fromKubeconfig(path);
 
-    openshiftRestClient(settings).then((client) => {
+    openshiftRestClient({config: customConfig}).then((client) => {
       // Use the client object to find a list of projects, for example
-      client.projects.findAll().then((projects) => {
-        console.log(projects);
+      client.apis['project.openshift.io'].v1.project.get().then((response) => {
+        console.log(response.body);
       });
     });
 
-If you don't have an OpenShift access token, you can use basic authentication by providing username and password as follows:
-    
-    const openshiftRestClient = require('openshift-rest-client');
-    const settings = {};
-
-    const customConfig = {
-      apiVersion: 'v1',
-      context:
-      { cluster: '192-168-99-100:8443',
-        namespace: 'for-node-client-testing',
-        user: 'developer/192-168-99-100:8443' },
-      user: { 
-        username: yourUsername,
-        password: youPassword 
-      },
-      cluster: 'https://192.168.99.100:8443' }
-    };
-
-    settings.config = customConfig;
-
-    openshiftRestClient(settings).then((client) => {
-      // Use the client object to find a list of projects, for example
-      client.projects.findAll().then((projects) => {
-        console.log(projects);
-      });
-    });
+To see more examples of how to customize your config, check out the [kubernetes-client Initializing section](https://www.npmjs.com/package/kubernetes-client#initializing)
 
 
+
+#### Changes in 2.0
+
+The client has been totally rewritten for the 2.0 release.  This includes a new, more fluent, API.
+
+The old API will live in the 1.x branch.
