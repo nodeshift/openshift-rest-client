@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.5](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.4...v1.6.5) (2019-03-13)
+
+
+
 <a name="1.6.4"></a>
 ## [1.6.4](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.3...v1.6.4) (2019-01-23)
 
