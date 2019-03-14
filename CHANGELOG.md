@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.4...v2.0.0) (2019-03-14)
+
+
+### Features
+
+* Refactor of the library ([#113](https://github.com/nodeshift/openshift-rest-client/issues/113)) ([aa8a6e3](https://github.com/nodeshift/openshift-rest-client/commit/aa8a6e3)), closes [#71](https://github.com/nodeshift/openshift-rest-client/issues/71)
+
+
+### BREAKING CHANGES
+
+* API is now different
+
+* The API is now generated based on the Openshift Open api spec
+
+* Using the [kubernetes-client](https://github.com/godaddy/kubernetes-client) under the hood
+
+* The api is fluent, for example, client.apis['build.openshift.io'].v1.namespace('default').builds.get()
+
+* Not a drop in replacement for version 1.x
+
+
+
 <a name="1.6.4"></a>
 ## [1.6.4](https://github.com/nodeshift/openshift-rest-client/compare/v1.6.3...v1.6.4) (2019-01-23)
 
