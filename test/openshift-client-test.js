@@ -69,3 +69,140 @@ test('openshift client tests', (t) => {
     t.end();
   });
 });
+
+test('test basic auth - username/password', async (t) => {
+  const settings = {
+    config: {
+      url: 'http://',
+      auth: {
+        username: 'luke',
+        password: 'password'
+      }
+    }
+  };
+  // Need to stub the config loader for these tests
+  const stubbedConfig = (client) => {
+    t.fail('this should not be called ');
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    'kubernetes-client': {
+      config: {
+        fromKubeconfig: stubbedConfig
+      }
+    },
+    './basic-auth-request': {
+      getTokenFromBasicAuth: (options) => {
+        t.equal(options.user, settings.config.auth.username);
+        t.equal(options.password, settings.config.auth.password);
+        t.equal(options.url, settings.config.url);
+        return Promise.resolve('123456789');
+      }
+    }
+  });
+
+  await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
+
+test('test basic auth - user/pass', async (t) => {
+  const settings = {
+    config: {
+      url: 'http://',
+      auth: {
+        user: 'luke',
+        pass: 'password'
+      },
+      insecureSkipTlsVerify: true
+    }
+  };
+  // Need to stub the config loader for these tests
+  const stubbedConfig = (client) => {
+    t.fail('this should not be called ');
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    'kubernetes-client': {
+      config: {
+        fromKubeconfig: stubbedConfig
+      }
+    },
+    './basic-auth-request': {
+      getTokenFromBasicAuth: (options) => {
+        t.equal(options.user, settings.config.auth.user);
+        t.equal(options.password, settings.config.auth.pass);
+        t.equal(options.url, settings.config.url);
+        t.equal(options.insecureSkipTlsVerify, true);
+        return Promise.resolve('123456789');
+      }
+    }
+  });
+
+  await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
+
+test('test different config', async (t) => {
+  const settings = {
+    config: {
+      url: 'http://',
+      insecureSkipTlsVerify: true
+    }
+  };
+  // Need to stub the config loader for these tests
+  const stubbedConfig = (client) => {
+    t.fail('this should not be called ');
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    'kubernetes-client': {
+      config: {
+        fromKubeconfig: stubbedConfig
+      }
+    },
+    './basic-auth-request': {
+      getTokenFromBasicAuth: (options) => {
+        t.fail();
+        return Promise.reject(new Error('nope'));
+      }
+    }
+  });
+
+  await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
+
+test('test different config with auth and no user/username', async (t) => {
+  const settings = {
+    config: {
+      url: 'http://',
+      auth: {},
+      insecureSkipTlsVerify: true
+    }
+  };
+  // Need to stub the config loader for these tests
+  const stubbedConfig = (client) => {
+    t.fail('this should not be called ');
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    'kubernetes-client': {
+      config: {
+        fromKubeconfig: stubbedConfig
+      }
+    },
+    './basic-auth-request': {
+      getTokenFromBasicAuth: (options) => {
+        t.fail();
+        return Promise.reject(new Error('nope'));
+      }
+    }
+  });
+
+  await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
