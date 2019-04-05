@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v2.0.1...v2.1.0) (2019-04-05)
+
+
+### Features
+
+* use a username/password combo to login ([#118](https://github.com/nodeshift/openshift-rest-client/issues/118)) ([f1098f1](https://github.com/nodeshift/openshift-rest-client/commit/f1098f1)), closes [#117](https://github.com/nodeshift/openshift-rest-client/issues/117)
+
+
+
 ## [2.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v2.0.0...v2.0.1) (2019-04-01)
 
 
