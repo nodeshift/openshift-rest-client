@@ -80,6 +80,33 @@ For example, if you want to provide a different path to your configuration, you 
       });
     });
 
+
+If you want to use a username/password combo to authenticate to Openshift, you might do something like this:
+
+```
+const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
+
+
+(async function () {
+  const settings = {
+  };
+
+  settings.config = {
+    url: process.env.CLUSTER_URL,
+    auth: {
+      username: process.env.ADMIN_USERNAME,
+      password: process.env.ADMIN_PASSWORD
+    },
+    insecureSkipTlsVerify: true
+  };
+
+  const client = await openshiftRestClient(settings);
+
+  const projects = await client.apis['build.openshift.io'].v1.ns('myproject').builds.get();
+  console.log(projects);
+})();
+```
+
 To see more examples of how to customize your config, check out the [kubernetes-client Initializing section](https://www.npmjs.com/package/kubernetes-client#initializing)
 
 
