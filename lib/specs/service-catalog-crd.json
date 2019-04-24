@@ -1,0 +1,17 @@
+{
+  "kind": "CustomResourceDefinition",
+  "spec": {
+    "scope": "Namespaced",
+    "version": "v1beta1",
+    "group": "servicecatalog.k8s.io",
+    "names": {
+      "shortNames": [
+        "si"
+      ],
+      "kind": "ServiceInstance",
+      "plural": "serviceinstances",
+      "singular": "serviceinstance"
+    }
+  },
+  "apiVersion": "servicecatalog.k8s.io/v1beta1"
+}
