@@ -44,19 +44,19 @@
     "request": "~2.88.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.0",
-    "eslint": "^5.14.1",
+    "coveralls": "~3.0.4",
+    "eslint": "^6.0.1",
     "eslint-config-semistandard": "^13.0.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^9.0.0",
-    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-import": "~2.18.0",
+    "eslint-plugin-node": "~9.1.0",
+    "eslint-plugin-promise": "~4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "nock": "^10.0.0",
-    "nyc": "^14.0.0",
+    "nyc": "~14.1.1",
     "proxyquire": "^2.0.0",
     "standard-version": "^6.0.1",
     "tap-spec": "^5.0.0",
-    "tape": "^4.6.3"
+    "tape": "~4.11.0"
   }
 }
