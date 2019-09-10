@@ -26,36 +26,6 @@
               
                 
                 <li><a
-                  href='#builderror'
-                  class="">
-                  buildError
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#gettokenfrombasicauth'
-                  class="">
-                  getTokenFromBasicAuth
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#getnames'
-                  class="">
-                  getNames
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#openshiftclient'
                   class="">
                   openshiftClient
@@ -79,216 +49,6 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='builderror'>
-      buildError
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Builds a custom error based on the <code>error</code> provided by request module.</p>
-
-    <div class='pre p1 fill-light mt0'>buildError</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>requestError</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    The request error object from request module.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        The custom error.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='gettokenfrombasicauth'>
-      getTokenFromBasicAuth
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Builds a custom request object and makes a http request to retrieve an access token.</p>
-
-    <div class='pre p1 fill-light mt0'>getTokenFromBasicAuth(settings: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>settings</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    The settings object which contains username and password.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
-        Promise object to resolve with the new access token.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getnames'>
-      getNames
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Function is passed in and called by the kubernetes-client to add the openshift aliases.</p>
-
-    <div class='pre p1 fill-light mt0'>getNames(resourceType: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>resourceType</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    alias array element.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>:
-        alias array.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='openshiftclient'>
       openshiftClient
     </h3>
@@ -298,6 +58,8 @@
   
 
   <p>Builds the rest client based on provided or default kubernetes configuration.</p>
+<p>If you want to use a username/password combo to authenticate to Openshift,
+you might do something like the example.</p>
 
     <div class='pre p1 fill-light mt0'>openshiftClient(settings: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
@@ -341,6 +103,19 @@
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>settings.config = {
+  <span class="hljs-attr">url</span>: process.env.CLUSTER_URL,
+    <span class="hljs-attr">auth</span>: {
+      <span class="hljs-attr">username</span>: process.env.ADMIN_USERNAME,
+      <span class="hljs-attr">password</span>: process.env.ADMIN_PASSWORD
+    },
+    <span class="hljs-attr">insecureSkipTlsVerify</span>: <span class="hljs-literal">true</span>
+};</pre>
+    
   
 
   
