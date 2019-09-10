@@ -10,6 +10,7 @@
     "coverage:html": "nyc npm test && nyc report --reporter=html",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "ci": "npm run lint && npm run coveralls",
+    "docs": "documentation build lib/** -f html -o docs",
     "release": "standard-version"
   },
   "files": [
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "coveralls": "~3.0.5",
+    "documentation": "^12.1.1",
     "eslint": "^6.0.1",
     "eslint-config-semistandard": "^15.0.0",
     "eslint-config-standard": "^14.1.0",
