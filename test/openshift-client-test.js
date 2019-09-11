@@ -19,6 +19,7 @@ test('openshift client tests', (t) => {
   };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    'kubernetes-client/backends/request': function StubRequest () {},
     'kubernetes-client': {
       config: {
         fromKubeconfig: stubbedConfig
