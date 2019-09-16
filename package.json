@@ -1,6 +1,6 @@
 {
   "name": "openshift-rest-client",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Node.js client for developing with OpenShift",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
   "bugs": "https://github.com/nodeshift/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
-    "kubernetes-client": "~8.3.4",
+    "kubernetes-client": "~8.3.0",
     "request": "~2.88.0"
   },
   "devDependencies": {
