@@ -13,6 +13,12 @@
     "docs": "documentation build lib/** -f html -o docs",
     "release": "standard-version"
   },
+  "standard-version": {
+    "scripts": {
+      "postbump": "npm run docs",
+      "precommit": "git add docs/"
+    }
+  },
   "files": [
     "package.json",
     "README.md",
