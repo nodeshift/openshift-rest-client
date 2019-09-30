@@ -79,6 +79,39 @@ test('basic auth request with 401 error', (t) => {
   });
 });
 
+test('basic auth request with defined auth url', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      t.true(requestObject.url.includes('https://test'), 'Unexpected auth url value');
+      return cb(null, {
+        statusCode: 200,
+        request: {
+          uri: {
+            hash: '#access_token=9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0&expires_in=86400&scope=user%3Afull&token_type=Bearer'
+          }
+        }
+      });
+    }
+  });
+
+  const settings = {
+    url: 'http://',
+    authUrl: 'https://test',
+    user: 'username',
+    password: 'password',
+    insecureSkipTlsVerify: true
+  };
+
+  const p = basicAuthRequest.getTokenFromBasicAuth(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.then((token) => {
+    t.equal(token, '9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0', 'should be equal');
+    t.end();
+  });
+});
+
 // test('test common request - Has a token - Request Error', (t) => {
 //   const common = proxyquire('../lib/common-request', {
 //     request: (requestObject, cb) => {
