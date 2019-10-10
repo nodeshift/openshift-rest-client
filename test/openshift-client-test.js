@@ -73,7 +73,7 @@ test('openshift client tests', (t) => {
 test('test basic auth - username/password', async (t) => {
   const settings = {
     config: {
-      url: 'http://',
+      url: 'http://test-url',
       auth: {
         username: 'luke',
         password: 'password'
@@ -109,7 +109,7 @@ test('test basic auth - username/password', async (t) => {
 test('test basic auth - user/pass', async (t) => {
   const settings = {
     config: {
-      url: 'http://',
+      url: 'http://test-url',
       auth: {
         user: 'luke',
         pass: 'password'
@@ -147,7 +147,7 @@ test('test basic auth - user/pass', async (t) => {
 test('test different config', async (t) => {
   const settings = {
     config: {
-      url: 'http://',
+      url: 'http://test-url',
       insecureSkipTlsVerify: true
     }
   };
@@ -178,7 +178,7 @@ test('test different config', async (t) => {
 test('test different config with auth and no user/username', async (t) => {
   const settings = {
     config: {
-      url: 'http://',
+      url: 'http://test-url',
       auth: {},
       insecureSkipTlsVerify: true
     }
