@@ -20,5 +20,5 @@
 
 module.exports = exports = {
   OpenshiftClient: require('./lib/openshift-rest-client.js'),
-  config: require('kubernetes-client/backends/request').config
+  config: new (require('kubernetes-client').KubeConfig)()
 };

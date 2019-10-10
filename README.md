@@ -71,7 +71,7 @@ For example, if you want to provide a different path to your configuration, you 
     const config = require('openshift-rest-client').config;
 
     const path '~/some/path/config';
-    const customConfig = config.fromKubeconfig(path);
+    const customConfig = config.loadFromFile(path);
 
     openshiftRestClient({config: customConfig}).then((client) => {
       // Use the client object to find a list of projects, for example
