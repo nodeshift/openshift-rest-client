@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v2.3.0...v3.0.0) (2019-10-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Some API has changed
+
+* This commit updates the client to remove deprecation warnings caused by the kubernetes-clients.  There are some changes to getting external configs.
+
+### Bug Fixes
+
+* remove warnings about deprecations ([#171](https://github.com/nodeshift/openshift-rest-client/issues/171)) ([9f7b379](https://github.com/nodeshift/openshift-rest-client/commit/9f7b379))
+
 ## [2.3.0](https://github.com/nodeshift/openshift-rest-client/compare/v2.2.2...v2.3.0) (2019-09-30)
 
 
