@@ -111,3 +111,37 @@ test('basic auth request with defined auth url', (t) => {
     t.end();
   });
 });
+
+test('basic auth request with missing hash', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      t.true(requestObject.url.includes('https://test'), 'Unexpected auth url value');
+      return cb(null, {
+        statusCode: 200,
+        request: {
+          uri: {
+            hash: undefined,
+            host: 'testhost'
+          }
+        }
+      });
+    }
+  });
+
+  const settings = {
+    url: 'http://',
+    authUrl: 'https://test',
+    user: 'username',
+    password: 'password',
+    insecureSkipTlsVerify: true
+  };
+
+  const p = basicAuthRequest.getTokenFromBasicAuth(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.catch((error) => {
+    t.equal(error.message, 'Unable to authenticate user username to testhost. Cannot obtain access token from response.', 'should be equal');
+    t.end();
+  });
+});
