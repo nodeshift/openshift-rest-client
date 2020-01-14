@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.0.1...v3.1.0) (2020-01-14)
+
+
+### Features
+
+* return the kubeconfig on the client ([#186](https://github.com/nodeshift/openshift-rest-client/issues/186)) ([898f2ae](https://github.com/nodeshift/openshift-rest-client/commit/898f2ae))
+
 ### [3.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v3.0.0...v3.0.1) (2019-11-19)
 
 
