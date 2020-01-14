@@ -3,6 +3,8 @@
 const test = require('tape');
 const proxyquire = require('proxyquire');
 
+const userDefinedConfig = require('./test-config.json');
+
 test('openshift rest client', (t) => {
   const openshiftRestClient = require('../');
 
@@ -66,6 +68,7 @@ test('openshift client tests', (t) => {
     t.ok(client.apis['user.openshift.io'], 'client object should have a user object');
     t.ok(client.apis.user, 'user object is aliased to user');
 
+    t.ok(client.kubeconfig, 'client should have the kubeconfig object');
     t.end();
   });
 });
@@ -203,6 +206,19 @@ test('test different config with auth and no user/username', async (t) => {
   });
 
   await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
+
+test('test different config - user defined', async (t) => {
+  const openshiftRestClient = require('../');
+
+  openshiftRestClient.config.loadFromString(JSON.stringify(userDefinedConfig));
+  const settings = {
+    config: openshiftRestClient.config
+  };
+
+  await openshiftRestClient.OpenshiftClient(settings);
   t.pass();
   t.end();
 });
