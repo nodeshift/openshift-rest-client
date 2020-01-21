@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.1.0...v3.2.0) (2020-01-21)
+
+
+### Features
+
+* load config from a file location. ([#190](https://github.com/nodeshift/openshift-rest-client/issues/190)) ([811a67f](https://github.com/nodeshift/openshift-rest-client/commit/811a67f)), closes [#189](https://github.com/nodeshift/openshift-rest-client/issues/189)
+
 ## [3.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.0.1...v3.1.0) (2020-01-14)
 
 
