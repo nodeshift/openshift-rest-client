@@ -68,12 +68,10 @@ The openshift-rest-client exposes the config module from the kubernetes client f
 For example, if you want to provide a different path to your configuration, you can do something like this:
 
     const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
-    const config = require('openshift-rest-client').config;
 
-    const path '~/some/path/config';
-    const customConfig = config.loadFromFile(path);
+    const config = '~/some/path/config';
 
-    openshiftRestClient({config: customConfig}).then((client) => {
+    openshiftRestClient({ config }).then((client) => {
       // Use the client object to find a list of projects, for example
       client.apis['project.openshift.io'].v1.project.get().then((response) => {
         console.log(response.body);
