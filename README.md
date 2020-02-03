@@ -32,6 +32,12 @@ So, to fetch all Projects:
 const projects = await client.apis['project.openshift.io'].v1.projects.get()
 ```
 
+If needed, [Query Parameters](https://docs.openshift.com/container-platform/3.11/rest_api/apis-project.openshift.io/v1.Project.html#query-parameters-3) can be used:
+
+```js
+const projects = await client.apis['project.openshift.io'].v1.projects.get({qs: {labelSelector: 'someOpenShiftLabel'}})
+```
+
 The openshift-rest-client translates Path Templating \[[2]\] (*e.g.*,
 `/apis/build.openshift.io/v1/namespaces/$NAMESPACE/buildconfigs`) to function calls (*e.g.*,
 `apis['build.openshift.io'].v1.namespaces('default').buildconfigs`).
