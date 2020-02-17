@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.2.0...v4.0.0) (2020-02-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* removal of Node 8 support
+
+* engine parameter targets node 10+ ([#194](https://github.com/nodeshift/openshift-rest-client/issues/194)) ([ab0bab4](https://github.com/nodeshift/openshift-rest-client/commit/ab0bab46e705a1eac9279d7f87ffff4f09961875))
+
 ## [3.2.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.1.0...v3.2.0) (2020-01-21)
 
 
