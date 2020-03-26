@@ -47,7 +47,7 @@
   "bugs": "https://github.com/nodeshift/openshift-rest-client/issues",
   "license": "Apache-2.0",
   "dependencies": {
-    "kubernetes-client": "~8.3.0",
+    "kubernetes-client": "~8.3.6",
     "request": "~2.88.2"
   },
   "devDependencies": {
