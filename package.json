@@ -48,7 +48,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "kubernetes-client": "~8.3.0",
-    "request": "~2.88.0"
+    "request": "~2.88.2"
   },
   "devDependencies": {
     "coveralls": "~3.0.5",
