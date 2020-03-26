@@ -51,7 +51,7 @@
     "request": "~2.88.2"
   },
   "devDependencies": {
-    "coveralls": "~3.0.5",
+    "coveralls": "~3.0.9",
     "documentation": "^12.1.4",
     "eslint": "^6.0.1",
     "eslint-config-semistandard": "^15.0.0",
