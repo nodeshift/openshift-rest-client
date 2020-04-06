@@ -8,7 +8,7 @@
     "test": "tape test/*-test.js | tap-spec",
     "coverage": "nyc npm test",
     "coverage:html": "nyc npm test && nyc report --reporter=html",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm test && nyc report && if [ $COVERALLS_REPO_TOKEN'' != '' ] ; then nyc report --reporter=text-lcov | coveralls; fi",
     "ci": "npm run lint && npm run coveralls",
     "docs": "documentation build lib/** -f html -o docs",
     "release": "standard-version -a"

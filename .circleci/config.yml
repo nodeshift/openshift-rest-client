@@ -1,0 +1,49 @@
+# Javascript Node CircleCI 2.1 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+commands:
+  test-nodejs:
+    steps:
+      - run:
+          name: 'Output Node Version'
+          command: 'node -v'
+
+      - checkout
+
+      # install with npm ci to make sure package.json and lock are N'Sync
+      # No need to cache node_modules since npm ci will delete it
+      - run: npm ci
+
+      # run tests!
+      - run: npm run ci
+
+jobs:
+  node10:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - test-nodejs
+
+  node12:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - test-nodejs
+
+workflows:
+  version: 2
+  test_node_versions:
+    jobs:
+      - node10:
+        filters:
+          branches:
+            ignore:
+              - gh-pages
+      - node12:
+        filters:
+          branches:
+            ignore:
+              - gh-pages
