@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v4.0.0...v4.0.1) (2020-04-13)
+
+
+### Bug Fixes
+
+* pin the kubernetese-client version to 8.3.6 ([#208](https://github.com/nodeshift/openshift-rest-client/issues/208)) ([d9dfbcb](https://github.com/nodeshift/openshift-rest-client/commit/d9dfbcbe71d6c8348b675fa0e4ab4c242774d9bf))
+* upgrade coveralls from 3.0.6 to 3.0.9 ([#200](https://github.com/nodeshift/openshift-rest-client/issues/200)) ([c4d0fcd](https://github.com/nodeshift/openshift-rest-client/commit/c4d0fcd07fc2d894b28f41493a5f4ce2c8247c79))
+* upgrade documentation from 12.1.2 to 12.1.4 ([#202](https://github.com/nodeshift/openshift-rest-client/issues/202)) ([60e418e](https://github.com/nodeshift/openshift-rest-client/commit/60e418ed6ee6589de370324c024e6677d15614aa))
+* upgrade eslint from 6.5.0 to 6.8.0 ([#199](https://github.com/nodeshift/openshift-rest-client/issues/199)) ([baebe7a](https://github.com/nodeshift/openshift-rest-client/commit/baebe7ae49c87982b5af7115e34af3d80aea8596))
+* upgrade kubernetes-client from 8.3.4 to 8.3.6 ([#203](https://github.com/nodeshift/openshift-rest-client/issues/203)) ([2dfa271](https://github.com/nodeshift/openshift-rest-client/commit/2dfa27148b3fed680f5458567c3670c9f96c511f))
+* upgrade nock from 12.0.0 to 12.0.2 ([#201](https://github.com/nodeshift/openshift-rest-client/issues/201)) ([7597d6f](https://github.com/nodeshift/openshift-rest-client/commit/7597d6fb5142a798c4436e8021c88b858236fb57))
+* upgrade request from 2.88.0 to 2.88.2 ([#204](https://github.com/nodeshift/openshift-rest-client/issues/204)) ([007a6b4](https://github.com/nodeshift/openshift-rest-client/commit/007a6b488f0d21f61f839ddf654fe61b5aae4a1a))
+* upgrade tape from 4.13.0 to 4.13.2 ([#205](https://github.com/nodeshift/openshift-rest-client/issues/205)) ([5ab6a48](https://github.com/nodeshift/openshift-rest-client/commit/5ab6a4882f66f9aefb4df544d1bd7c7003835d10))
+
 ## [4.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v3.2.0...v4.0.0) (2020-02-17)
 
 
