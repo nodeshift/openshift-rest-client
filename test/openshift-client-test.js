@@ -15,18 +15,7 @@ test('openshift rest client', (t) => {
 });
 
 test('openshift client tests', (t) => {
-  // Need to stub the config loader for these tests
-  const stubbedConfig = (client) => {
-    return Promise.resolve(client);
-  };
-
-  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    'kubernetes-client': {
-      config: {
-        fromKubeconfig: stubbedConfig
-      }
-    }
-  });
+  const openshiftRestClient = require('../lib/openshift-rest-client');
 
   const osClient = openshiftRestClient();
   t.equal(osClient instanceof Promise, true, 'should return a Promise');
@@ -83,17 +72,8 @@ test('test basic auth - username/password', async (t) => {
       }
     }
   };
-  // Need to stub the config loader for these tests
-  const stubbedConfig = (client) => {
-    t.fail('this should not be called ');
-  };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    'kubernetes-client': {
-      config: {
-        fromKubeconfig: stubbedConfig
-      }
-    },
     './basic-auth-request': {
       getTokenFromBasicAuth: (options) => {
         t.equal(options.user, settings.config.auth.username);
@@ -120,17 +100,8 @@ test('test basic auth - user/pass', async (t) => {
       insecureSkipTlsVerify: true
     }
   };
-  // Need to stub the config loader for these tests
-  const stubbedConfig = (client) => {
-    t.fail('this should not be called ');
-  };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    'kubernetes-client': {
-      config: {
-        fromKubeconfig: stubbedConfig
-      }
-    },
     './basic-auth-request': {
       getTokenFromBasicAuth: (options) => {
         t.equal(options.user, settings.config.auth.user);
@@ -154,17 +125,8 @@ test('test different config', async (t) => {
       insecureSkipTlsVerify: true
     }
   };
-  // Need to stub the config loader for these tests
-  const stubbedConfig = (client) => {
-    t.fail('this should not be called ');
-  };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    'kubernetes-client': {
-      config: {
-        fromKubeconfig: stubbedConfig
-      }
-    },
     './basic-auth-request': {
       getTokenFromBasicAuth: (options) => {
         t.fail();
@@ -186,17 +148,8 @@ test('test different config with auth and no user/username', async (t) => {
       insecureSkipTlsVerify: true
     }
   };
-  // Need to stub the config loader for these tests
-  const stubbedConfig = (client) => {
-    t.fail('this should not be called ');
-  };
 
   const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
-    'kubernetes-client': {
-      config: {
-        fromKubeconfig: stubbedConfig
-      }
-    },
     './basic-auth-request': {
       getTokenFromBasicAuth: (options) => {
         t.fail();
