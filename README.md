@@ -113,6 +113,14 @@ const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
 
 To see more examples of how to customize your config, check out the [kubernetes-client Initializing section](https://www.npmjs.com/package/kubernetes-client#initializing)
 
+#### Load API from a Remote Cluster
+
+By default, the openshift-rest-client, will load a swagger spec file that is included with the module.  This has all the basic API's that come with Openshift and Kubernetes.  If you are using operators to extend your cluster, the openshift-rest-client, by default, won't know about them.
+
+To fix this, you can tell the openshift-rest-client to load the spec file from your remote cluster using the `loadSpecFromCluster` option.  Setting this to true, will try to load the spec file from your clusters `/openapi/v2` endpoint.  If that doesn't exist, it will also try, `/swagger.json`
+
+In a future version of this client,  this might become the default.
+
 
 
 #### Changes in 2.0
