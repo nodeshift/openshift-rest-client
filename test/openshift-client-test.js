@@ -212,3 +212,63 @@ test('openshift client tests - loadSpecFromCluster', async (t) => {
   t.ok(osClient.kubeconfig, 'client should have the kubeconfig object');
   t.end();
 });
+
+test('openshift client tests - loadSpecFromCluster - Fail to load remote and load default spec', async (t) => {
+  const openshiftRestClient = require('../');
+
+  openshiftRestClient.config.loadFromString(JSON.stringify(userDefinedConfig));
+  const settings = {
+    loadSpecFromCluster: true,
+    config: openshiftRestClient.config
+  };
+
+  nock('https://192.168.99.100:8443')
+    .matchHeader('authorization', 'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U')
+    .get('/openapi/v2')
+    .reply(404, { message: 'Nope' })
+    .get('/swagger.json')
+    .reply(404, { message: 'Nope' });
+
+  const osClient = await openshiftRestClient.OpenshiftClient(settings);
+
+  t.pass('Failing client load should load default spec');
+
+  t.ok(osClient.apis['build.openshift.io'], 'client object should have a build object');
+  t.ok(osClient.apis.build, 'build object is aliased');
+
+  t.ok(osClient.apis['apps.openshift.io'], 'client object should have a apps object');
+  t.ok(osClient.apis.app, 'apps object is aliased to app');
+
+  t.ok(osClient.apis['authorization.openshift.io'], 'client object should have a authorization object');
+  t.ok(osClient.apis.authorization, 'authorization object is aliased to authorization');
+
+  t.ok(osClient.apis['image.openshift.io'], 'client object should have a image object');
+  t.ok(osClient.apis.image, 'image object is aliased to image');
+
+  t.ok(osClient.apis['network.openshift.io'], 'osClient object should have a network object');
+  t.ok(osClient.apis.network, 'network object is aliased to network');
+
+  t.ok(osClient.apis['oauth.openshift.io'], 'osClient object should have a oauth object');
+  t.ok(osClient.apis.oauth, 'oauth object is aliased to oauth');
+
+  t.ok(osClient.apis['project.openshift.io'], 'osClient object should have a project object');
+  t.ok(osClient.apis.project, 'project object is aliased to project');
+
+  t.ok(osClient.apis['quota.openshift.io'], 'osClient object should have a quota object');
+  t.ok(osClient.apis.quota, 'quota object is aliased to quota');
+
+  t.ok(osClient.apis['route.openshift.io'], 'osClient object should have a route object');
+  t.ok(osClient.apis.route, 'route object is aliased to route');
+
+  t.ok(osClient.apis['security.openshift.io'], 'osClient object should have a security object');
+  t.ok(osClient.apis.security, 'security object is aliased to security');
+
+  t.ok(osClient.apis['template.openshift.io'], 'osClient object should have a template object');
+  t.ok(osClient.apis.template, 'template object is aliased to template');
+
+  t.ok(osClient.apis['user.openshift.io'], 'osClient object should have a user object');
+  t.ok(osClient.apis.user, 'user object is aliased to user');
+
+  t.ok(osClient.kubeconfig, 'client should have the kubeconfig object');
+  t.end();
+});
