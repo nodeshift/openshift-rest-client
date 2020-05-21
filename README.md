@@ -119,6 +119,8 @@ By default, the openshift-rest-client, will load a swagger spec file that is inc
 
 To fix this, you can tell the openshift-rest-client to load the spec file from your remote cluster using the `loadSpecFromCluster` option.  Setting this to true, will try to load the spec file from your clusters `/openapi/v2` endpoint.  If that doesn't exist, it will also try, `/swagger.json`
 
+If the remote spec cannot be loaded,  a warning will be output to the console and the default spec will be loaded.
+
 In a future version of this client,  this might become the default.
 
 
