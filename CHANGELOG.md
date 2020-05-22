@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v4.0.1...v4.1.0) (2020-05-22)
+
+
+### Features
+
+* Load from cluster spec ([#218](https://github.com/nodeshift/openshift-rest-client/issues/218)) ([52324a7](https://github.com/nodeshift/openshift-rest-client/commit/52324a7dcfc30062a6fb7f56862b4b770e228b77))
+
+
+### Bug Fixes
+
+* upgrade eslint-plugin-node from 11.0.0 to 11.1.0 ([#210](https://github.com/nodeshift/openshift-rest-client/issues/210)) ([308cf54](https://github.com/nodeshift/openshift-rest-client/commit/308cf54da06a14b64d81e1186cf93acc2049ca3f))
+
 ### [4.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v4.0.0...v4.0.1) (2020-04-13)
 
 
