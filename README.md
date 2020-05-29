@@ -84,6 +84,83 @@ For example, if you want to provide a different path to your configuration, you 
       });
     });
 
+You can also pass a plain object or a [KubeConfig](https://github.com/nodeshift/openshift-rest-client/blob/049059de652d9467b342f465a9394f321fc960bf/index.js#L23) object.
+
+An example of a plain object:
+
+```
+    const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
+    const k8Config = require('openshift-rest-client').config;
+
+    const config = {
+      apiVersion: 'v1',
+      kind: 'Config',
+      clusters: [
+          {
+            name: 'cluster',
+            cluster: {
+              skipTLSVerify: true,
+              server: 'server-time'
+            }
+          }
+        ],
+        users: [{ name: 'user', token: '123456' }],
+        contexts: [
+          {
+            context: {
+              user: 'user',
+              cluster: 'cluster'
+            },
+            name: 'context'
+          }
+        ],
+        'current-context': 'context'
+      };
+
+    openshiftRestClient({config}).then((client) => {
+      console.log(client);
+    });
+```
+
+An example of a KubeConfig object:
+
+```
+    const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
+    const k8Config = require('openshift-rest-client').config;
+
+    const config = {
+      apiVersion: 'v1',
+      kind: 'Config',
+      clusters: [
+          {
+            name: 'cluster',
+            cluster: {
+              skipTLSVerify: true,
+              server: 'server-time'
+            }
+          }
+        ],
+        users: [{ name: 'user', token: '123456' }],
+        contexts: [
+          {
+            context: {
+              user: 'user',
+              cluster: 'cluster'
+            },
+            name: 'context'
+          }
+        ],
+        'current-context': 'context'
+      };
+
+      k8Config.loadFromString(JSON.stringify(config));
+
+
+      openshiftRestClient({config: k8Config}).then((client) => {
+        console.log(client);
+      });
+```
+
 
 If you want to use a username/password combo to authenticate to Openshift, you might do something like this:
 
