@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/nodeshift/openshift-rest-client/compare/v4.1.0...v4.1.1) (2020-05-30)
+
+
+### Bug Fixes
+
+* Pass in an normal object as a Config ([#223](https://github.com/nodeshift/openshift-rest-client/issues/223)) ([acffb3d](https://github.com/nodeshift/openshift-rest-client/commit/acffb3d2d0d0e0fa50225b36a7bcf0532a52fa8d)), closes [#222](https://github.com/nodeshift/openshift-rest-client/issues/222)
+
 ## [4.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v4.0.1...v4.1.0) (2020-05-22)
 
 
