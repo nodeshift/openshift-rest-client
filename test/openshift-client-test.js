@@ -164,12 +164,38 @@ test('test different config with auth and no user/username', async (t) => {
   t.end();
 });
 
-test('test different config - user defined', async (t) => {
+test('test different config - user defined - as KubeConfig', async (t) => {
   const openshiftRestClient = require('../');
 
   openshiftRestClient.config.loadFromString(JSON.stringify(userDefinedConfig));
   const settings = {
     config: openshiftRestClient.config
+  };
+
+  await openshiftRestClient.OpenshiftClient(settings);
+  t.pass();
+  t.end();
+});
+
+test('test different config - different location as a string', async (t) => {
+  const openshiftRestClient = require('../');
+
+  const configLocation = `${__dirname}/test-config`;
+  const settings = {
+    config: configLocation
+  };
+
+  const client = await openshiftRestClient.OpenshiftClient(settings);
+  const { kubeconfig } = client;
+  t.equal(kubeconfig.currentContext, 'for-node-client-testing/192-168-99-100:8443/developer', 'current context is correctly loaded');
+  t.end();
+});
+
+test('test different config - user defined - as Regular Object', async (t) => {
+  const openshiftRestClient = require('../');
+
+  const settings = {
+    config: userDefinedConfig
   };
 
   await openshiftRestClient.OpenshiftClient(settings);
