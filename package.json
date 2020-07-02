@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "coveralls": "~3.1.0",
-    "documentation": "^12.1.4",
+    "documentation": "^13.0.2",
     "eslint": "^6.8.0",
     "eslint-config-semistandard": "^15.0.0",
     "eslint-config-standard": "^14.1.0",
