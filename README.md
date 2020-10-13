@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/nodeshift/openshift-rest-client.svg?branch=master)](https://travis-ci.org/nodeshift/openshift-rest-client)  [![Coverage Status](https://coveralls.io/repos/github/nodeshift/openshift-rest-client/badge.svg?branch=master)](https://coveralls.io/github/nodeshift/openshift-rest-client?branch=master)
+![Node.js CI](https://github.com/nodeshift/openshift-rest-client/workflows/Node.js%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/nodeshift/openshift-rest-client/badge.svg?branch=master)](https://coveralls.io/github/nodeshift/openshift-rest-client?branch=master)
+[![Greenkeeper badge](https://badges.greenkeeper.io/nodeshift/openshift-rest-client.svg)](https://greenkeeper.io/)
 
 ### Openshift Client
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/nodeshift/openshift-rest-client.svg)](https://greenkeeper.io/)
 
 Node.js based client for the Openshift REST API, not unlike the Fabric8 Maven Plugin, but for node clients/builds.
 

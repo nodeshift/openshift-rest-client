@@ -4,12 +4,8 @@
   "description": "Node.js client for developing with OpenShift",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint lib/*.js test/*.js index.js",
-    "test": "tape test/*-test.js | tap-spec",
-    "coverage": "nyc npm test",
-    "coverage:html": "nyc npm test && nyc report --reporter=html",
-    "coveralls": "nyc npm test && nyc report && if [ $COVERALLS_REPO_TOKEN'' != '' ] ; then nyc report --reporter=text-lcov | coveralls; fi",
-    "ci": "npm run lint && npm run coveralls",
+    "pretest": "eslint lib/*.js test/*.js index.js",
+    "test": "nyc tape test/*-test.js | tap-spec",
     "docs": "documentation build lib/** -f html -o docs",
     "release": "standard-version -a"
   },
@@ -38,7 +34,7 @@
     "email": "lholmqui@redhat.com"
   },
   "engines": {
-    "node": ">= 10"
+    "node": "^14 || ^12 || ^10"
   },
   "repository": {
     "type": "git",
