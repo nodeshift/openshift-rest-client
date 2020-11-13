@@ -62,5 +62,6 @@
     "standard-version": "^9.0.0",
     "tap-spec": "^5.0.0",
     "tape": "~4.13.3"
-  }
+  },
+  "support": true
 }
