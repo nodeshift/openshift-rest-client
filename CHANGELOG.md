@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v4.1.1...v5.0.0) (2021-01-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed authUrl added automatic auth url retrieval.
+
+### Features
+
+* **package:** upgrade kubernetes-client from 8.3.6 to 9.0.0 ([#234](https://github.com/nodeshift/openshift-rest-client/issues/234)) ([60e801b](https://github.com/nodeshift/openshift-rest-client/commit/60e801b068bf934e08f3dcc343ecabe0e71b5c22))
+
+
+### Bug Fixes
+
+* Removed authUrl added automatic auth url retrieval. ([8db3420](https://github.com/nodeshift/openshift-rest-client/commit/8db342036063b2dd7ba73e4e2f207f704036d4a5))
+* upgrade documentation from 13.0.2 to 13.1.0 ([#242](https://github.com/nodeshift/openshift-rest-client/issues/242)) ([b9cc5c1](https://github.com/nodeshift/openshift-rest-client/commit/b9cc5c152e8b8d5b2f77d2b661991747cd884cd5))
+* upgrade eslint-plugin-import from 2.22.0 to 2.22.1 ([#239](https://github.com/nodeshift/openshift-rest-client/issues/239)) ([4e5a37e](https://github.com/nodeshift/openshift-rest-client/commit/4e5a37e3f7a1203b66ec8965ccbe6e56710c3570))
+* upgrade eslint-plugin-standard from 4.0.1 to 4.0.2 ([#241](https://github.com/nodeshift/openshift-rest-client/issues/241)) ([1f12885](https://github.com/nodeshift/openshift-rest-client/commit/1f12885f9758bec7882175b4e7ab5ba942ccba34))
+* upgrade eslint-plugin-standard from 4.0.2 to 4.1.0 ([#244](https://github.com/nodeshift/openshift-rest-client/issues/244)) ([65de536](https://github.com/nodeshift/openshift-rest-client/commit/65de536f1acf4f8fc2321c01d459679db9346e6b))
+* upgrade standard-version from 8.0.1 to 8.0.2 ([#236](https://github.com/nodeshift/openshift-rest-client/issues/236)) ([ab29702](https://github.com/nodeshift/openshift-rest-client/commit/ab29702c1e9754b0b321a8e45ca5ac8ab9672ed3))
+
 ### [4.1.1](https://github.com/nodeshift/openshift-rest-client/compare/v4.1.0...v4.1.1) (2020-05-30)
 
 
