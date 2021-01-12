@@ -113,6 +113,31 @@ test('test basic auth - token', async (t) => {
   t.end();
 });
 
+test('test basic auth - token, user and password', async (t) => {
+  const settings = {
+    config: {
+      url: 'http://test-url',
+      auth: {
+        username: 'developer',
+        password: 'developer',
+        token: '12345'
+      }
+    }
+  };
+
+  const openshiftRestClient = proxyquire('../lib/openshift-rest-client', {
+    './basic-auth-request': {
+      getTokenFromBasicAuth: () => {
+        t.fail('should not reach this');
+      }
+    }
+  });
+
+  await openshiftRestClient(settings);
+  t.pass();
+  t.end();
+});
+
 test('test basic auth - user/pass', async (t) => {
   const settings = {
     config: {
