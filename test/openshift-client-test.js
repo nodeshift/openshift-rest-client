@@ -104,6 +104,15 @@ test('test basic auth - token', async (t) => {
     './basic-auth-request': {
       getTokenFromBasicAuth: () => {
         t.fail('should not reach this');
+      },
+      getUserFromAuthToken: () => {
+        t.pass('should reach here');
+        return Promise.resolve({
+          kind: 'User',
+          metadata: {
+            user: 'developer'
+          }
+        });
       }
     }
   });
@@ -129,6 +138,15 @@ test('test basic auth - token, user and password', async (t) => {
     './basic-auth-request': {
       getTokenFromBasicAuth: () => {
         t.fail('should not reach this');
+      },
+      getUserFromAuthToken: () => {
+        t.pass('should reach here');
+        return Promise.resolve({
+          kind: 'User',
+          metadata: {
+            user: 'developer'
+          }
+        });
       }
     }
   });
