@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v5.0.0...v5.1.0) (2021-01-13)
+
+
+### Features
+
+*  Pass a valid auth token. ([#248](https://github.com/nodeshift/openshift-rest-client/issues/248)) ([558bcdb](https://github.com/nodeshift/openshift-rest-client/commit/558bcdbf2dfc3cf3f7df6b534da11afa28bd5ed9))
+
 ## [5.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v4.1.1...v5.0.0) (2021-01-05)
 
 
