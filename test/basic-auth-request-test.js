@@ -147,3 +147,90 @@ test('basic auth request with request error', (t) => {
     t.end();
   });
 });
+
+// Getting the User from a Token Tests
+
+test('get user from token', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      t.equal(requestObject.strictSSL, false, 'should be false');
+      return cb(null, {
+        statusCode: 200
+      },
+      JSON.stringify({
+        kind: 'User',
+        metadata: {
+          name: 'developer'
+        }
+      })
+      );
+    }
+  });
+
+  const settings = {
+    url: 'http://',
+    token: '12346',
+    insecureSkipTlsVerify: true
+  };
+
+  const p = basicAuthRequest.getUserFromAuthToken(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.then((userObject) => {
+    t.equal(userObject.metadata.name, 'developer', 'user should be equal');
+    t.end();
+  });
+});
+
+test('get user from token with 401 status code', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      t.equal(requestObject.strictSSL, false, 'should be false');
+      return cb(null, {
+        statusCode: 401,
+        request: {
+          uri: {
+            host: 'https://'
+          }
+        }
+      });
+    }
+  });
+
+  const settings = {
+    url: 'http://',
+    token: '12346',
+    insecureSkipTlsVerify: true
+  };
+
+  const p = basicAuthRequest.getUserFromAuthToken(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.catch((error) => {
+    t.equal(error.message,
+      '401 Unable to authenticate with token 12346',
+      'should be equal');
+    t.end();
+  });
+});
+
+test('get user from token with request error', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      return cb({ message: 'Error' }, {});
+    }
+  });
+
+  const settings = {};
+
+  const p = basicAuthRequest.getUserFromAuthToken(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.catch((error) => {
+    t.equal(error.message, 'Error', 'should be equal');
+    t.end();
+  });
+});

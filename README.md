@@ -188,6 +188,21 @@ const openshiftRestClient = require('openshift-rest-client').OpenshiftClient;
 })();
 ```
 
+It is also possible to send in a valid auth token instead of a username/password.  If we use the above example,  the settings object might look something like this:
+
+```
+const settings = {
+  };
+
+settings.config = {
+  url: process.env.CLUSTER_URL,
+  auth: {
+    token: process.env.TOKEN
+  },
+  insecureSkipTlsVerify: true
+};
+```
+
 To see more examples of how to customize your config, check out the [kubernetes-client Initializing section](https://www.npmjs.com/package/kubernetes-client#initializing)
 
 #### Load API from a Remote Cluster
