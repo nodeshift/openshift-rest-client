@@ -63,7 +63,7 @@ await client.apis['build.openshift.io'].v1.namespaces('default').buildconfigs(bu
 
 The openshift-rest-client supports `.delete`, `.get`, `.patch`, `.post`, and `.put`.
 
-There are also aliases defined, so instead of writing `client.apis['build.openshift.io']`, you can just use `client.apis.build` for example.  The list of aliases can be seen here: https://github.com/nodeshift/openshift-rest-client/blob/master/lib/openshift-rest-client.js
+There are also aliases defined, so instead of writing `client.apis['build.openshift.io']`, you can just use `client.apis.build` for example.  The list of aliases can be seen here: https://github.com/nodeshift/openshift-rest-client/blob/HEAD/lib/openshift-rest-client.js
 
 ### Advanced Usage
 
