@@ -34,7 +34,7 @@
     "email": "lholmqui@redhat.com"
   },
   "engines": {
-    "node": "^14 || ^12 || ^10"
+    "node": "^16 || ^14 || ^12"
   },
   "repository": {
     "type": "git",
