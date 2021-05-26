@@ -4,13 +4,14 @@
 
 const test = require('tape');
 const proxyquire = require('proxyquire');
+const BASE_URL = 'http://some.cluster.com:6443/';
 
 test('basic auth request', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
-        t.equal(url, 'http://');
-        return Promise.resolve('https://');
+        t.equal(url, BASE_URL);
+        return Promise.resolve(BASE_URL);
       }
     },
     request: (requestObject, cb) => {
@@ -27,7 +28,7 @@ test('basic auth request', (t) => {
   });
 
   const settings = {
-    url: 'http://',
+    url: BASE_URL,
     user: 'username',
     password: 'password',
     insecureSkipTlsVerify: true
@@ -47,8 +48,8 @@ test('basic auth request with 404 status code', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
-        t.equal(url, 'http://');
-        return Promise.resolve('https://');
+        t.equal(url, BASE_URL);
+        return Promise.resolve(BASE_URL);
       }
     },
     request: (requestObject, cb) => {
@@ -57,7 +58,7 @@ test('basic auth request with 404 status code', (t) => {
         statusCode: 404,
         request: {
           uri: {
-            host: 'https://'
+            host: BASE_URL
           }
         }
       });
@@ -65,7 +66,7 @@ test('basic auth request with 404 status code', (t) => {
   });
 
   const settings = {
-    url: 'http://',
+    url: BASE_URL,
     user: 'username',
     password: 'password',
     insecureSkipTlsVerify: true
@@ -77,7 +78,7 @@ test('basic auth request with 404 status code', (t) => {
 
   p.catch((error) => {
     t.equal(error.message,
-      'Unable to authenticate user username to https://. Cannot obtain access token from response.',
+      `Unable to authenticate user username to ${BASE_URL}. Cannot obtain access token from response.`,
       'should be equal');
     t.end();
   });
@@ -87,8 +88,8 @@ test('basic auth request with 401 status code', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
-        t.equal(url, 'http://');
-        return Promise.resolve('https://');
+        t.equal(url, BASE_URL);
+        return Promise.resolve(BASE_URL);
       }
     },
     request: (requestObject, cb) => {
@@ -97,7 +98,7 @@ test('basic auth request with 401 status code', (t) => {
         statusCode: 401,
         request: {
           uri: {
-            host: 'https://'
+            host: BASE_URL
           }
         }
       });
@@ -105,7 +106,7 @@ test('basic auth request with 401 status code', (t) => {
   });
 
   const settings = {
-    url: 'http://',
+    url: BASE_URL,
     user: 'username',
     password: 'password',
     insecureSkipTlsVerify: true
@@ -128,7 +129,7 @@ test('basic auth request with request error', (t) => {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
         t.equal(url, undefined);
-        return Promise.resolve('https://');
+        return Promise.resolve(BASE_URL);
       }
     },
     request: (requestObject, cb) => {
@@ -168,7 +169,42 @@ test('get user from token', (t) => {
   });
 
   const settings = {
-    url: 'http://',
+    url: BASE_URL,
+    token: '12346',
+    insecureSkipTlsVerify: true
+  };
+
+  const p = basicAuthRequest.getUserFromAuthToken(settings);
+
+  t.equal(p instanceof Promise, true, 'is an Promise');
+
+  p.then((userObject) => {
+    t.equal(userObject.metadata.name, 'developer', 'user should be equal');
+    t.end();
+  });
+});
+
+test('get user from token URL join safety', (t) => {
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    request: (requestObject, cb) => {
+      t.equal(requestObject.strictSSL, false, 'should be false');
+      t.equal(requestObject.url, `${BASE_URL}apis/user.openshift.io/v1/users/~`);
+
+      return cb(null, {
+        statusCode: 200
+      },
+      JSON.stringify({
+        kind: 'User',
+        metadata: {
+          name: 'developer'
+        }
+      })
+      );
+    }
+  });
+
+  const settings = {
+    url: BASE_URL, // note the trailing slash
     token: '12346',
     insecureSkipTlsVerify: true
   };
@@ -191,7 +227,7 @@ test('get user from token with 401 status code', (t) => {
         statusCode: 401,
         request: {
           uri: {
-            host: 'https://'
+            host: BASE_URL
           }
         }
       });
@@ -199,7 +235,7 @@ test('get user from token with 401 status code', (t) => {
   });
 
   const settings = {
-    url: 'http://',
+    url: BASE_URL,
     token: '12346',
     insecureSkipTlsVerify: true
   };
@@ -223,7 +259,9 @@ test('get user from token with request error', (t) => {
     }
   });
 
-  const settings = {};
+  const settings = {
+    url: BASE_URL
+  };
 
   const p = basicAuthRequest.getUserFromAuthToken(settings);
 
