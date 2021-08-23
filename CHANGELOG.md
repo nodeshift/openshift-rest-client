@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://www.github.com/nodeshift/openshift-rest-client/compare/v6.0.0...v6.1.0) (2021-08-23)
+
+
+### Features
+
+* upgrade tape from 4.13.3 to 5.2.2 ([#276](https://www.github.com/nodeshift/openshift-rest-client/issues/276)) ([c4e9ad1](https://www.github.com/nodeshift/openshift-rest-client/commit/c4e9ad1ff80a988b38951fed45c93f00dc838e6d))
+
+
+### Bug Fixes
+
+* upgrade coveralls from 3.1.0 to 3.1.1 ([#273](https://www.github.com/nodeshift/openshift-rest-client/issues/273)) ([c3396d8](https://www.github.com/nodeshift/openshift-rest-client/commit/c3396d80ebb0100a9f70b77c73ebbdeea11c36da))
+* upgrade documentation from 13.1.1 to 13.2.5 ([#269](https://www.github.com/nodeshift/openshift-rest-client/issues/269)) ([126d7e8](https://www.github.com/nodeshift/openshift-rest-client/commit/126d7e838baaa5be7818e8d001a4416fd57a2a85))
+* upgrade eslint-plugin-import from 2.22.1 to 2.23.4 ([#270](https://www.github.com/nodeshift/openshift-rest-client/issues/270)) ([1bc4aef](https://www.github.com/nodeshift/openshift-rest-client/commit/1bc4aef58767dd4ecd833b53673b38bb3ae755ca))
+* upgrade standard-version from 9.1.1 to 9.3.0 ([#271](https://www.github.com/nodeshift/openshift-rest-client/issues/271)) ([94ad525](https://www.github.com/nodeshift/openshift-rest-client/commit/94ad525de42e63ee575c7e070a2f382b75dd433c))
+* upgrade standard-version from 9.3.0 to 9.3.1 ([#274](https://www.github.com/nodeshift/openshift-rest-client/issues/274)) ([47f91a4](https://www.github.com/nodeshift/openshift-rest-client/commit/47f91a4a6be1a5b175681f7289ffc75d75fe15e6))
+
 ## [6.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v5.1.0...v6.0.0) (2021-05-26)
 
 
