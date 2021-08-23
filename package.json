@@ -7,14 +7,7 @@
     "prepare": "husky install",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "nyc tape test/*-test.js | tap-spec",
-    "docs": "documentation build lib/** -f html -o docs",
-    "release": "standard-version -a"
-  },
-  "standard-version": {
-    "scripts": {
-      "postbump": "npm run docs",
-      "precommit": "git add docs/"
-    }
+    "docs": "documentation build lib/** -f html -o docs"
   },
   "files": [
     "package.json",
@@ -61,7 +54,6 @@
     "nock": "^12.0.2",
     "nyc": "~15.1.0",
     "proxyquire": "^2.1.3",
-    "standard-version": "^9.3.1",
     "tap-spec": "^5.0.0",
     "tape": "~5.2.2"
   },
