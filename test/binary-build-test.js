@@ -12,7 +12,8 @@ const userDefinedConfig = require('./test-config.json');
 test('instantiateBinary - buildconfig', async (t) => {
   openshiftRestClient.config.loadFromString(JSON.stringify(userDefinedConfig));
   const settings = {
-    config: openshiftRestClient.config
+    config: openshiftRestClient.config,
+    loadSpecFromCluster: false
   };
 
   const client = await openshiftRestClient.OpenshiftClient(settings);
