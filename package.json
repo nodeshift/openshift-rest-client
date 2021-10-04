@@ -11,7 +11,7 @@
   },
   "files": [
     "package.json",
-    "pacakage-support.json",
+    "package-support.json",
     "README.md",
     "LICENSE",
     "index.js",
