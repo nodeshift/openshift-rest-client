@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://www.github.com/nodeshift/openshift-rest-client/compare/v7.0.0...v7.0.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* upgrade eslint-plugin-import from 2.24.2 to 2.25.1 ([#286](https://www.github.com/nodeshift/openshift-rest-client/issues/286)) ([7bb267a](https://www.github.com/nodeshift/openshift-rest-client/commit/7bb267a83e9e823c1dcbb3cf1b77b44c7bf56a16))
+* upgrade eslint-plugin-import from 2.25.1 to 2.25.2 ([#289](https://www.github.com/nodeshift/openshift-rest-client/issues/289)) ([1b90ae2](https://www.github.com/nodeshift/openshift-rest-client/commit/1b90ae2ef6f7ebe85c5834b8b56fa36df627727b))
+* upgrade tape from 5.3.1 to 5.3.2 ([#290](https://www.github.com/nodeshift/openshift-rest-client/issues/290)) ([143d7ab](https://www.github.com/nodeshift/openshift-rest-client/commit/143d7abc5ce994c48174dacb3801ff63f0ac3b64))
+
 ## [7.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v6.1.0...v7.0.0) (2021-10-01)
 
 ### ⚠ BREAKING CHANGES
