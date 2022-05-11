@@ -46,7 +46,7 @@
     "documentation": "^13.2.5",
     "eslint": "^8.6.0",
     "eslint-config-semistandard": "^16.0.0",
-    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "~2.25.2",
     "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-promise": "~6.0.0",
