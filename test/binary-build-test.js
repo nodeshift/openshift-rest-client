@@ -25,7 +25,6 @@ test('instantiateBinary - buildconfig', async (t) => {
     .post(`/apis/build.openshift.io/v1/namespaces/for-node-client-testing/buildconfigs/${buildConfigName}/instantiatebinary`)
     .reply(201, { kind: 'BinaryBuildRequest' });
 
-  // eslint-disable-next-line n/no-path-concat
   const binaryResponse = await client.apis.build.v1.ns(namespace).buildconfigs(buildConfigName).instantiatebinary.post({ body: fs.createReadStream(`${__dirname}/test-config`), json: false });
   const response = JSON.parse(binaryResponse.body);
 
