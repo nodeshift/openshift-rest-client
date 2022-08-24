@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint standard/no-callback-literal: "off" */
-
 const test = require('tape');
 const proxyquire = require('proxyquire');
 const BASE_URL = 'http://some.cluster.com:6443/';
@@ -129,6 +127,7 @@ test('authorization server request with error', (t) => {
   const authorizationServerRequest = proxyquire('../lib/authorization-server-request', {
     request: (requestObject, cb) => {
       t.equal(requestObject.strictSSL, false, 'should be false');
+      // eslint-disable-next-line n/no-callback-literal
       return cb({
         message: 'message',
         errorCode: 'code'

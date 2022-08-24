@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint standard/no-callback-literal: "off" */
-
 const test = require('tape');
 const proxyquire = require('proxyquire');
 const BASE_URL = 'http://some.cluster.com:6443/';
@@ -133,6 +131,7 @@ test('basic auth request with request error', (t) => {
       }
     },
     request: (requestObject, cb) => {
+      // eslint-disable-next-line n/no-callback-literal
       return cb({ message: 'Error' }, {});
     }
   });
@@ -255,6 +254,7 @@ test('get user from token with 401 status code', (t) => {
 test('get user from token with request error', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     request: (requestObject, cb) => {
+      // eslint-disable-next-line n/no-callback-literal
       return cb({ message: 'Error' }, {});
     }
   });
