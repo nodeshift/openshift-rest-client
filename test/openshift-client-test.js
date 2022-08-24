@@ -246,7 +246,6 @@ test('test different config - user defined - as KubeConfig', async (t) => {
 test('test different config - different location as a string', async (t) => {
   const openshiftRestClient = require('../');
 
-  // eslint-disable-next-line n/no-path-concat
   const configLocation = `${__dirname}/test-config`;
   const settings = {
     config: configLocation
@@ -273,7 +272,6 @@ test('test different config - user defined - as Regular Object', async (t) => {
 test('test different config - different location as a string', async (t) => {
   const openshiftRestClient = require('../');
 
-  // eslint-disable-next-line n/no-path-concat
   const configLocation = `${__dirname}/test-config`;
   const settings = {
     config: configLocation
