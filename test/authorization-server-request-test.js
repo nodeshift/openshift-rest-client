@@ -127,7 +127,6 @@ test('authorization server request with error', (t) => {
   const authorizationServerRequest = proxyquire('../lib/authorization-server-request', {
     request: (requestObject, cb) => {
       t.equal(requestObject.strictSSL, false, 'should be false');
-      // eslint-disable-next-line n/no-callback-literal
       return cb({
         message: 'message',
         errorCode: 'code'
