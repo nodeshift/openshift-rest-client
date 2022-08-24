@@ -21,8 +21,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install -g npm
-    - run: npm ci
+    - run: rm package-lock.json
+    - run: npm install
     - run: npm test
     - run: npx @pkgjs/support validate
     - run: node_modules/nyc/bin/nyc.js report --reporter=lcovonly
