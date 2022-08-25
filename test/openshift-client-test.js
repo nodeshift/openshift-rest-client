@@ -3,6 +3,7 @@
 const test = require('tape');
 const proxyquire = require('proxyquire');
 const nock = require('nock');
+const path = require('path');
 
 const userDefinedConfig = require('./test-config.json');
 
@@ -22,40 +23,79 @@ test('openshift client tests', (t) => {
   t.equal(osClient instanceof Promise, true, 'should return a Promise');
 
   osClient.then((client) => {
-    t.ok(client.apis['build.openshift.io'], 'client object should have a build object');
+    t.ok(
+      client.apis['build.openshift.io'],
+      'client object should have a build object'
+    );
     t.ok(client.apis.build, 'build object is aliased');
 
-    t.ok(client.apis['apps.openshift.io'], 'client object should have a apps object');
+    t.ok(
+      client.apis['apps.openshift.io'],
+      'client object should have a apps object'
+    );
     t.ok(client.apis.app, 'apps object is aliased to app');
 
-    t.ok(client.apis['authorization.openshift.io'], 'client object should have a authorization object');
-    t.ok(client.apis.authorization, 'authorization object is aliased to authorization');
+    t.ok(
+      client.apis['authorization.openshift.io'],
+      'client object should have a authorization object'
+    );
+    t.ok(
+      client.apis.authorization,
+      'authorization object is aliased to authorization'
+    );
 
-    t.ok(client.apis['image.openshift.io'], 'client object should have a image object');
+    t.ok(
+      client.apis['image.openshift.io'],
+      'client object should have a image object'
+    );
     t.ok(client.apis.image, 'image object is aliased to image');
 
-    t.ok(client.apis['network.openshift.io'], 'client object should have a network object');
+    t.ok(
+      client.apis['network.openshift.io'],
+      'client object should have a network object'
+    );
     t.ok(client.apis.network, 'network object is aliased to network');
 
-    t.ok(client.apis['oauth.openshift.io'], 'client object should have a oauth object');
+    t.ok(
+      client.apis['oauth.openshift.io'],
+      'client object should have a oauth object'
+    );
     t.ok(client.apis.oauth, 'oauth object is aliased to oauth');
 
-    t.ok(client.apis['project.openshift.io'], 'client object should have a project object');
+    t.ok(
+      client.apis['project.openshift.io'],
+      'client object should have a project object'
+    );
     t.ok(client.apis.project, 'project object is aliased to project');
 
-    t.ok(client.apis['quota.openshift.io'], 'client object should have a quota object');
+    t.ok(
+      client.apis['quota.openshift.io'],
+      'client object should have a quota object'
+    );
     t.ok(client.apis.quota, 'quota object is aliased to quota');
 
-    t.ok(client.apis['route.openshift.io'], 'client object should have a route object');
+    t.ok(
+      client.apis['route.openshift.io'],
+      'client object should have a route object'
+    );
     t.ok(client.apis.route, 'route object is aliased to route');
 
-    t.ok(client.apis['security.openshift.io'], 'client object should have a security object');
+    t.ok(
+      client.apis['security.openshift.io'],
+      'client object should have a security object'
+    );
     t.ok(client.apis.security, 'security object is aliased to security');
 
-    t.ok(client.apis['template.openshift.io'], 'client object should have a template object');
+    t.ok(
+      client.apis['template.openshift.io'],
+      'client object should have a template object'
+    );
     t.ok(client.apis.template, 'template object is aliased to template');
 
-    t.ok(client.apis['user.openshift.io'], 'client object should have a user object');
+    t.ok(
+      client.apis['user.openshift.io'],
+      'client object should have a user object'
+    );
     t.ok(client.apis.user, 'user object is aliased to user');
 
     t.ok(client.kubeconfig, 'client should have the kubeconfig object');
@@ -246,15 +286,18 @@ test('test different config - user defined - as KubeConfig', async (t) => {
 test('test different config - different location as a string', async (t) => {
   const openshiftRestClient = require('../');
 
-  // eslint-disable-next-line n/no-path-concat
-  const configLocation = `${__dirname}/test-config`;
+  const configLocation = path.join(__dirname, 'test-config');
   const settings = {
     config: configLocation
   };
 
   const client = await openshiftRestClient.OpenshiftClient(settings);
   const { kubeconfig } = client;
-  t.equal(kubeconfig.currentContext, 'for-node-client-testing/192-168-99-100:8443/developer', 'current context is correctly loaded');
+  t.equal(
+    kubeconfig.currentContext,
+    'for-node-client-testing/192-168-99-100:8443/developer',
+    'current context is correctly loaded'
+  );
   t.end();
 });
 
@@ -273,15 +316,18 @@ test('test different config - user defined - as Regular Object', async (t) => {
 test('test different config - different location as a string', async (t) => {
   const openshiftRestClient = require('../');
 
-  // eslint-disable-next-line n/no-path-concat
-  const configLocation = `${__dirname}/test-config`;
+  const configLocation = path.join(__dirname, 'test-config');
   const settings = {
     config: configLocation
   };
 
   const client = await openshiftRestClient.OpenshiftClient(settings);
   const { kubeconfig } = client;
-  t.equal(kubeconfig.currentContext, 'for-node-client-testing/192-168-99-100:8443/developer', 'current context is correctly loaded');
+  t.equal(
+    kubeconfig.currentContext,
+    'for-node-client-testing/192-168-99-100:8443/developer',
+    'current context is correctly loaded'
+  );
   t.end();
 });
 
@@ -295,13 +341,18 @@ test('openshift client tests - loadSpecFromCluster', async (t) => {
   };
 
   nock('https://192.168.99.100:8443')
-    .matchHeader('authorization', 'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U')
+    .matchHeader(
+      'authorization',
+      'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U'
+    )
     .get('/openapi/v2')
     .reply(201, { paths: {} });
 
   const osClient = await openshiftRestClient.OpenshiftClient(settings);
 
-  t.pass('client created using the loadSpec function and hitting the /openapi/v2');
+  t.pass(
+    'client created using the loadSpec function and hitting the /openapi/v2'
+  );
 
   t.ok(osClient.kubeconfig, 'client should have the kubeconfig object');
   t.end();
@@ -317,7 +368,10 @@ test('openshift client tests - loadSpecFromCluster - Fail to load remote and loa
   };
 
   nock('https://192.168.99.100:8443')
-    .matchHeader('authorization', 'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U')
+    .matchHeader(
+      'authorization',
+      'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U'
+    )
     .get('/openapi/v2')
     .reply(404, { message: 'Nope' })
     .get('/swagger.json')
@@ -327,40 +381,79 @@ test('openshift client tests - loadSpecFromCluster - Fail to load remote and loa
 
   t.pass('Failing client load should load default spec');
 
-  t.ok(osClient.apis['build.openshift.io'], 'client object should have a build object');
+  t.ok(
+    osClient.apis['build.openshift.io'],
+    'client object should have a build object'
+  );
   t.ok(osClient.apis.build, 'build object is aliased');
 
-  t.ok(osClient.apis['apps.openshift.io'], 'client object should have a apps object');
+  t.ok(
+    osClient.apis['apps.openshift.io'],
+    'client object should have a apps object'
+  );
   t.ok(osClient.apis.app, 'apps object is aliased to app');
 
-  t.ok(osClient.apis['authorization.openshift.io'], 'client object should have a authorization object');
-  t.ok(osClient.apis.authorization, 'authorization object is aliased to authorization');
+  t.ok(
+    osClient.apis['authorization.openshift.io'],
+    'client object should have a authorization object'
+  );
+  t.ok(
+    osClient.apis.authorization,
+    'authorization object is aliased to authorization'
+  );
 
-  t.ok(osClient.apis['image.openshift.io'], 'client object should have a image object');
+  t.ok(
+    osClient.apis['image.openshift.io'],
+    'client object should have a image object'
+  );
   t.ok(osClient.apis.image, 'image object is aliased to image');
 
-  t.ok(osClient.apis['network.openshift.io'], 'osClient object should have a network object');
+  t.ok(
+    osClient.apis['network.openshift.io'],
+    'osClient object should have a network object'
+  );
   t.ok(osClient.apis.network, 'network object is aliased to network');
 
-  t.ok(osClient.apis['oauth.openshift.io'], 'osClient object should have a oauth object');
+  t.ok(
+    osClient.apis['oauth.openshift.io'],
+    'osClient object should have a oauth object'
+  );
   t.ok(osClient.apis.oauth, 'oauth object is aliased to oauth');
 
-  t.ok(osClient.apis['project.openshift.io'], 'osClient object should have a project object');
+  t.ok(
+    osClient.apis['project.openshift.io'],
+    'osClient object should have a project object'
+  );
   t.ok(osClient.apis.project, 'project object is aliased to project');
 
-  t.ok(osClient.apis['quota.openshift.io'], 'osClient object should have a quota object');
+  t.ok(
+    osClient.apis['quota.openshift.io'],
+    'osClient object should have a quota object'
+  );
   t.ok(osClient.apis.quota, 'quota object is aliased to quota');
 
-  t.ok(osClient.apis['route.openshift.io'], 'osClient object should have a route object');
+  t.ok(
+    osClient.apis['route.openshift.io'],
+    'osClient object should have a route object'
+  );
   t.ok(osClient.apis.route, 'route object is aliased to route');
 
-  t.ok(osClient.apis['security.openshift.io'], 'osClient object should have a security object');
+  t.ok(
+    osClient.apis['security.openshift.io'],
+    'osClient object should have a security object'
+  );
   t.ok(osClient.apis.security, 'security object is aliased to security');
 
-  t.ok(osClient.apis['template.openshift.io'], 'osClient object should have a template object');
+  t.ok(
+    osClient.apis['template.openshift.io'],
+    'osClient object should have a template object'
+  );
   t.ok(osClient.apis.template, 'template object is aliased to template');
 
-  t.ok(osClient.apis['user.openshift.io'], 'osClient object should have a user object');
+  t.ok(
+    osClient.apis['user.openshift.io'],
+    'osClient object should have a user object'
+  );
   t.ok(osClient.apis.user, 'user object is aliased to user');
 
   t.ok(osClient.kubeconfig, 'client should have the kubeconfig object');

@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "pretest": "eslint --ignore-path .gitignore .",
     "test": "nyc tape test/*-test.js | tap-spec",
     "docs": "documentation build lib/** -f html -o docs"
   },
@@ -24,10 +23,12 @@
   "author": {
     "name": "Red Hat, Inc."
   },
-  "maintainers": {
-    "name": "Lucas Holmquist",
-    "email": "lholmqui@redhat.com"
-  },
+  "maintainers": [
+    {
+      "name": "Lucas Holmquist",
+      "email": "lholmqui@redhat.com"
+    }
+  ],
   "engines": {
     "node": "^16 || ^14 || ^12"
   },

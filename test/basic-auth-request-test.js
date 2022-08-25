@@ -37,7 +37,11 @@ test('basic auth request', (t) => {
   t.equal(p instanceof Promise, true, 'is an Promise');
 
   p.then((token) => {
-    t.equal(token, '9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0', 'should be equal');
+    t.equal(
+      token,
+      '9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0',
+      'should be equal'
+    );
     t.end();
   });
 });
@@ -75,9 +79,11 @@ test('basic auth request with 404 status code', (t) => {
   t.equal(p instanceof Promise, true, 'is an Promise');
 
   p.catch((error) => {
-    t.equal(error.message,
+    t.equal(
+      error.message,
       `Unable to authenticate user username to ${BASE_URL}. Cannot obtain access token from response.`,
-      'should be equal');
+      'should be equal'
+    );
     t.end();
   });
 });
@@ -115,9 +121,11 @@ test('basic auth request with 401 status code', (t) => {
   t.equal(p instanceof Promise, true, 'is an Promise');
 
   p.catch((error) => {
-    t.equal(error.message,
+    t.equal(
+      error.message,
       '401 Unable to authenticate user username',
-      'should be equal');
+      'should be equal'
+    );
     t.end();
   });
 });
@@ -131,8 +139,8 @@ test('basic auth request with request error', (t) => {
       }
     },
     request: (requestObject, cb) => {
-      // eslint-disable-next-line n/no-callback-literal
-      return cb({ message: 'Error' }, {});
+      const message = { message: 'Error' };
+      return cb(message, {});
     }
   });
 
@@ -154,15 +162,17 @@ test('get user from token', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     request: (requestObject, cb) => {
       t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(null, {
-        statusCode: 200
-      },
-      JSON.stringify({
-        kind: 'User',
-        metadata: {
-          name: 'developer'
-        }
-      })
+      return cb(
+        null,
+        {
+          statusCode: 200
+        },
+        JSON.stringify({
+          kind: 'User',
+          metadata: {
+            name: 'developer'
+          }
+        })
       );
     }
   });
@@ -187,17 +197,22 @@ test('get user from token URL join safety', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     request: (requestObject, cb) => {
       t.equal(requestObject.strictSSL, false, 'should be false');
-      t.equal(requestObject.url, `${BASE_URL}apis/user.openshift.io/v1/users/~`);
+      t.equal(
+        requestObject.url,
+        `${BASE_URL}apis/user.openshift.io/v1/users/~`
+      );
 
-      return cb(null, {
-        statusCode: 200
-      },
-      JSON.stringify({
-        kind: 'User',
-        metadata: {
-          name: 'developer'
-        }
-      })
+      return cb(
+        null,
+        {
+          statusCode: 200
+        },
+        JSON.stringify({
+          kind: 'User',
+          metadata: {
+            name: 'developer'
+          }
+        })
       );
     }
   });
@@ -244,9 +259,11 @@ test('get user from token with 401 status code', (t) => {
   t.equal(p instanceof Promise, true, 'is an Promise');
 
   p.catch((error) => {
-    t.equal(error.message,
+    t.equal(
+      error.message,
       '401 Unable to authenticate with token 12346',
-      'should be equal');
+      'should be equal'
+    );
     t.end();
   });
 });
@@ -254,8 +271,8 @@ test('get user from token with 401 status code', (t) => {
 test('get user from token with request error', (t) => {
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     request: (requestObject, cb) => {
-      // eslint-disable-next-line n/no-callback-literal
-      return cb({ message: 'Error' }, {});
+      const message = { message: 'Error' };
+      return cb(message, {});
     }
   });
 

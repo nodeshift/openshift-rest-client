@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const openshiftRestClient = require('../');
 const userDefinedConfig = require('./test-config.json');
+const path = require('path');
 
 // There was an issue with some underlying dependecies that made this api break
 // but not any others.
@@ -21,14 +22,28 @@ test('instantiateBinary - buildconfig', async (t) => {
   const namespace = 'for-node-client-testing';
 
   nock('https://192.168.99.100:8443')
-    .matchHeader('authorization', 'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U')
-    .post(`/apis/build.openshift.io/v1/namespaces/for-node-client-testing/buildconfigs/${buildConfigName}/instantiatebinary`)
+    .matchHeader(
+      'authorization',
+      'Bearer zVBd1ZFeJqEAILJgimm4-gZJauaw3PW4EVqV_peEZ3U'
+    )
+    .post(
+      `/apis/build.openshift.io/v1/namespaces/for-node-client-testing/buildconfigs/${buildConfigName}/instantiatebinary`
+    )
     .reply(201, { kind: 'BinaryBuildRequest' });
 
-  // eslint-disable-next-line n/no-path-concat
-  const binaryResponse = await client.apis.build.v1.ns(namespace).buildconfigs(buildConfigName).instantiatebinary.post({ body: fs.createReadStream(`${__dirname}/test-config`), json: false });
+  const binaryResponse = await client.apis.build.v1
+    .ns(namespace)
+    .buildconfigs(buildConfigName)
+    .instantiatebinary.post({
+      body: fs.createReadStream(path.join(__dirname, 'test-config')),
+      json: false
+    });
   const response = JSON.parse(binaryResponse.body);
 
-  t.equal(response.kind, 'BinaryBuildRequest', 'returns an object with BinaryBuildRequest');
+  t.equal(
+    response.kind,
+    'BinaryBuildRequest',
+    'returns an object with BinaryBuildRequest'
+  );
   t.end();
 });
