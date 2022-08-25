@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
+    "pretest": "eslint --ignore-path .gitignore .",
     "test": "nyc tape test/*-test.js | tap-spec",
     "docs": "documentation build lib/** -f html -o docs"
   },
