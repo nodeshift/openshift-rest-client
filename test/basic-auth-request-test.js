@@ -5,6 +5,30 @@ const proxyquire = require('proxyquire');
 const BASE_URL = 'http://some.cluster.com:6443/';
 
 test('basic auth request', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                uri: {
+                  hash: '#access_token=9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0&expires_in=86400&scope=user%3Afull&token_type=Bearer'
+                }
+              });
+            }
+          }
+        });
+      });
+    }
+  }
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
@@ -12,16 +36,8 @@ test('basic auth request', (t) => {
         return Promise.resolve(BASE_URL);
       }
     },
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(null, {
-        statusCode: 200,
-        request: {
-          uri: {
-            hash: '#access_token=9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0&expires_in=86400&scope=user%3Afull&token_type=Bearer'
-          }
-        }
-      });
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -47,6 +63,30 @@ test('basic auth request', (t) => {
 });
 
 test('basic auth request with 404 status code', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 404,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                uri: {
+                  host: BASE_URL
+                }
+              });
+            }
+          }
+        });
+      });
+    }
+  }
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
@@ -54,16 +94,8 @@ test('basic auth request with 404 status code', (t) => {
         return Promise.resolve(BASE_URL);
       }
     },
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(null, {
-        statusCode: 404,
-        request: {
-          uri: {
-            host: BASE_URL
-          }
-        }
-      });
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -89,6 +121,30 @@ test('basic auth request with 404 status code', (t) => {
 });
 
 test('basic auth request with 401 status code', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 401,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                uri: {
+                  host: BASE_URL
+                }
+              });
+            }
+          }
+        });
+      });
+    }
+  }
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
@@ -96,16 +152,8 @@ test('basic auth request with 401 status code', (t) => {
         return Promise.resolve(BASE_URL);
       }
     },
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(null, {
-        statusCode: 401,
-        request: {
-          uri: {
-            host: BASE_URL
-          }
-        }
-      });
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -131,6 +179,14 @@ test('basic auth request with 401 status code', (t) => {
 });
 
 test('basic auth request with request error', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    request (options) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ message: 'Error' });
+    }
+  }
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
     './authorization-server-request': {
       getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
@@ -138,9 +194,8 @@ test('basic auth request with request error', (t) => {
         return Promise.resolve(BASE_URL);
       }
     },
-    request: (requestObject, cb) => {
-      const message = { message: 'Error' };
-      return cb(message, {});
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -159,21 +214,40 @@ test('basic auth request with request error', (t) => {
 // Getting the User from a Token Tests
 
 test('get user from token', (t) => {
-  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(
-        null,
-        {
-          statusCode: 200
-        },
-        JSON.stringify({
-          kind: 'User',
-          metadata: {
-            name: 'developer'
+  class MockClient {
+    static '@noCallThru' = true;
+
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                kind: 'User',
+                metadata: {
+                  name: 'developer'
+                }
+              });
+            }
           }
-        })
-      );
+        });
+      });
+    }
+  }
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    './authorization-server-request': {
+      getAuthUrlFromOCP: (url, insecureSkipTlsVerify) => {
+        t.equal(url, BASE_URL);
+        return Promise.resolve(BASE_URL);
+      }
+    },
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -194,26 +268,37 @@ test('get user from token', (t) => {
 });
 
 test('get user from token URL join safety', (t) => {
-  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      t.equal(
-        requestObject.url,
-        `${BASE_URL}apis/user.openshift.io/v1/users/~`
-      );
+  class MockClient {
+    static '@noCallThru' = true;
 
-      return cb(
-        null,
-        {
-          statusCode: 200
-        },
-        JSON.stringify({
-          kind: 'User',
-          metadata: {
-            name: 'developer'
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(url, `${BASE_URL}`, 'url should be equal to base url');
+      this.url = url;
+    }
+
+    request (options) {
+      t.equal(this.url + options.path, `${BASE_URL}apis/user.openshift.io/v1/users/~`);
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                kind: 'User',
+                metadata: {
+                  name: 'developer'
+                }
+              });
+            }
           }
-        })
-      );
+        });
+      });
+    }
+  }
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -234,17 +319,33 @@ test('get user from token URL join safety', (t) => {
 });
 
 test('get user from token with 401 status code', (t) => {
-  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
-    request: (requestObject, cb) => {
-      t.equal(requestObject.strictSSL, false, 'should be false');
-      return cb(null, {
-        statusCode: 401,
-        request: {
-          uri: {
-            host: BASE_URL
+  class MockClient {
+    static '@noCallThru' = true;
+
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 401,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                uri: {
+                  host: BASE_URL
+                }
+              });
+            }
           }
-        }
+        });
       });
+    }
+  }
+  const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
+    undici: {
+      Client: MockClient
     }
   });
 
@@ -269,10 +370,17 @@ test('get user from token with 401 status code', (t) => {
 });
 
 test('get user from token with request error', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    request (options) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ message: 'Error' });
+    }
+  }
   const basicAuthRequest = proxyquire('../lib/basic-auth-request', {
-    request: (requestObject, cb) => {
-      const message = { message: 'Error' };
-      return cb(message, {});
+    undici: {
+      Client: MockClient
     }
   });
 
