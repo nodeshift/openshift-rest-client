@@ -4,23 +4,35 @@ const test = require('tape');
 const proxyquire = require('proxyquire');
 const BASE_URL = 'http://some.cluster.com:6443/';
 
-test('authorization server request', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, false, 'should be false');
-        return cb(
-          null,
-          {
-            statusCode: 200
-          },
-          `{"authorization_endpoint": "${BASE_URL}"}`
-        );
-      }
+function create (MockClient) {
+  return proxyquire('../lib/authorization-server-request', {
+    undici: {
+      Client: MockClient
     }
-  );
+  });
+}
 
+test('authorization server request', (t) => {
+  class MockClient {
+    static '@noCallThru' = true;
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                authorization_endpoint: BASE_URL
+              });
+            }
+          }
+        });
+      });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL, false);
 
   t.equal(p instanceof Promise, true, 'is an Promise');
@@ -36,60 +48,75 @@ test('authorization server request', (t) => {
 });
 
 test('authorization server request URL join safety', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, false, 'should be false');
-        t.equal(
-          requestObject.url,
-          `${BASE_URL}.well-known/oauth-authorization-server`
-        );
-        return cb(
-          null,
-          {
-            statusCode: 200
-          },
-          `{"authorization_endpoint": "${BASE_URL}"}`
-        );
-      }
-    }
-  );
+  class MockClient {
+    static '@noCallThru' = true;
 
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(url, `${BASE_URL}`, 'url should be equal to base url');
+      this.url = url;
+    }
+
+    request (options) {
+      t.equal(this.url + options.path, `${BASE_URL}.well-known/oauth-authorization-server`);
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                authorization_endpoint: BASE_URL
+              });
+            }
+          }
+        });
+      });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL, false);
 
-  t.equal(p instanceof Promise, true, 'is an Promise');
+  t.equal(p instanceof Promise, true, 'response is an Promise');
 
   p.then((url) => {
     t.equal(
       url,
       `${BASE_URL}?response_type=token&client_id=openshift-challenging-client`,
-      'should be equal'
+      'authorization_endpoint should be equal'
     );
     t.end();
   });
 });
 
 test('authorization server request without insecureSkipTlsVerify', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, true, 'should be true');
-        return cb(
-          null,
-          {
-            statusCode: 200
-          },
-          `{"authorization_endpoint": "${BASE_URL}"}`
-        );
-      }
-    }
-  );
+  class MockClient {
+    static '@noCallThru' = true;
 
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, true, 'strictSSL should be true');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({
+                authorization_endpoint: BASE_URL
+              });
+            }
+          }
+        });
+      });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL);
 
-  t.equal(p instanceof Promise, true, 'is an Promise');
+  t.equal(p instanceof Promise, true, 'response is an Promise');
 
   p.then((url) => {
     t.equal(
@@ -102,27 +129,28 @@ test('authorization server request without insecureSkipTlsVerify', (t) => {
 });
 
 test('authorization server request with empty body', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, false, 'should be false');
-        return cb(
-          null,
-          {
-            statusCode: 200,
-            request: {
-              uri: {
-                host: BASE_URL
-              }
-            }
-          },
-          '{}'
-        );
-      }
-    }
-  );
+  class MockClient {
+    static '@noCallThru' = true;
 
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 200,
+          body: {
+            json: () => {
+              return Promise.resolve({});
+            }
+          }
+        });
+      });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL, false);
 
   t.equal(p instanceof Promise, true, 'is an Promise');
@@ -138,23 +166,23 @@ test('authorization server request with empty body', (t) => {
 });
 
 test('authorization server request with 404 status code', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, false, 'should be false');
-        return cb(null, {
-          statusCode: 404,
-          request: {
-            uri: {
-              host: BASE_URL
-            }
-          }
-        });
-      }
-    }
-  );
+  class MockClient {
+    static '@noCallThru' = true;
 
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+    }
+
+    request (options) {
+      return new Promise((resolve, reject) => {
+        resolve({
+          statusCode: 404
+        });
+      });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL, false);
 
   t.equal(p instanceof Promise, true, 'is an Promise');
@@ -166,21 +194,20 @@ test('authorization server request with 404 status code', (t) => {
 });
 
 test('authorization server request with error', (t) => {
-  const authorizationServerRequest = proxyquire(
-    '../lib/authorization-server-request',
-    {
-      request: (requestObject, cb) => {
-        t.equal(requestObject.strictSSL, false, 'should be false');
+  class MockClient {
+    static '@noCallThru' = true;
 
-        const message = {
-          message: 'message',
-          errorCode: 'code'
-        };
-        return cb(message, null, null);
-      }
+    constructor (url, options) {
+      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
     }
-  );
 
+    request (options) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ message: 'message', errorCode: 'code' });
+    }
+  }
+
+  const authorizationServerRequest = create(MockClient);
   const p = authorizationServerRequest.getAuthUrlFromOCP(BASE_URL, false);
 
   t.equal(p instanceof Promise, true, 'is an Promise');
