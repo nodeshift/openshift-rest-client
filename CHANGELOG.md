@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://www.github.com/nodeshift/openshift-rest-client/compare/v7.0.0...v7.1.0) (2022-10-13)
+
+
+### Features
+
+* Replace request with undici ([#322](https://www.github.com/nodeshift/openshift-rest-client/issues/322)) ([b4d606b](https://www.github.com/nodeshift/openshift-rest-client/commit/b4d606bb9999205b83ac9f131493782156fc9735))
+* upgrade eslint from 7.32.0 to 8.6.0 ([#291](https://www.github.com/nodeshift/openshift-rest-client/issues/291)) ([25c99b9](https://www.github.com/nodeshift/openshift-rest-client/commit/25c99b98928c386a58c0825598de99a43ae3a9c1))
+* upgrade eslint-plugin-promise from 4.3.1 to 6.0.0 ([#293](https://www.github.com/nodeshift/openshift-rest-client/issues/293)) ([0a25faa](https://www.github.com/nodeshift/openshift-rest-client/commit/0a25faa26e9958bd653aaff92a04105fd355f9b3))
+* upgrade husky from 6.0.0 to 7.0.4 ([#294](https://www.github.com/nodeshift/openshift-rest-client/issues/294)) ([14a2a71](https://www.github.com/nodeshift/openshift-rest-client/commit/14a2a715b8e882ca0c10a84c06c647d7b8bde973))
+
+
+### Bug Fixes
+
+* fix eslint issues with dependencies ([99a577b](https://www.github.com/nodeshift/openshift-rest-client/commit/99a577bf0c20b346560a70259caa47fdefe3fbf3))
+* upgrade eslint-plugin-import from 2.24.2 to 2.25.1 ([#286](https://www.github.com/nodeshift/openshift-rest-client/issues/286)) ([7bb267a](https://www.github.com/nodeshift/openshift-rest-client/commit/7bb267a83e9e823c1dcbb3cf1b77b44c7bf56a16))
+* upgrade eslint-plugin-import from 2.25.1 to 2.25.2 ([#289](https://www.github.com/nodeshift/openshift-rest-client/issues/289)) ([1b90ae2](https://www.github.com/nodeshift/openshift-rest-client/commit/1b90ae2ef6f7ebe85c5834b8b56fa36df627727b))
+* upgrade tape from 5.3.1 to 5.3.2 ([#290](https://www.github.com/nodeshift/openshift-rest-client/issues/290)) ([143d7ab](https://www.github.com/nodeshift/openshift-rest-client/commit/143d7abc5ce994c48174dacb3801ff63f0ac3b64))
+
 ## [7.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v6.1.0...v7.0.0) (2021-10-01)
 
 ### ⚠ BREAKING CHANGES
