@@ -2,7 +2,7 @@
 
 const test = require('tape');
 const proxyquire = require('proxyquire');
-const BASE_URL = 'http://some.cluster.com:6443/';
+const BASE_URL = 'http://some.cluster.com:6443';
 
 test('basic auth request', (t) => {
   class MockClient {
@@ -278,7 +278,7 @@ test('get user from token URL join safety', (t) => {
     }
 
     request (options) {
-      t.equal(this.url + options.path, `${BASE_URL}apis/user.openshift.io/v1/users/~`);
+      t.equal(this.url + options.path, `${BASE_URL}/apis/user.openshift.io/v1/users/~`);
       return new Promise((resolve, reject) => {
         resolve({
           statusCode: 200,

@@ -2,7 +2,7 @@
 
 const test = require('tape');
 const proxyquire = require('proxyquire');
-const BASE_URL = 'http://some.cluster.com:6443/';
+const BASE_URL = 'http://some.cluster.com:6443';
 
 function create (MockClient) {
   return proxyquire('../lib/authorization-server-request', {
@@ -58,7 +58,7 @@ test('authorization server request URL join safety', (t) => {
     }
 
     request (options) {
-      t.equal(this.url + options.path, `${BASE_URL}.well-known/oauth-authorization-server`);
+      t.equal(this.url + options.path, `${BASE_URL}/.well-known/oauth-authorization-server`);
       return new Promise((resolve, reject) => {
         resolve({
           statusCode: 200,
