@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.1.1](https://www.github.com/nodeshift/openshift-rest-client/compare/v7.1.0...v7.1.1) (2022-10-14)
+
+
+### Bug Fixes
+
+* fix path on requestOptions ([#324](https://www.github.com/nodeshift/openshift-rest-client/issues/324)) ([198843b](https://www.github.com/nodeshift/openshift-rest-client/commit/198843b6eb61e623299d79055c315067d3a2c4b2))
+
 ## [7.1.0](https://www.github.com/nodeshift/openshift-rest-client/compare/v7.0.0...v7.1.0) (2022-10-13)
 
 
