@@ -3,6 +3,7 @@
   "version": "7.1.1",
   "description": "Node.js client for developing with OpenShift",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "prepare": "husky install",
     "pretest": "eslint --ignore-path .gitignore .",
