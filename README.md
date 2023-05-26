@@ -1,6 +1,5 @@
 ![Node.js CI](https://github.com/nodeshift/openshift-rest-client/workflows/Node.js%20CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/nodeshift/openshift-rest-client/badge.svg?branch=main)](https://coveralls.io/github/nodeshift/openshift-rest-client?branch=main)
-[![Greenkeeper badge](https://badges.greenkeeper.io/nodeshift/openshift-rest-client.svg)](https://greenkeeper.io/)
 
 ### Openshift Client
 
