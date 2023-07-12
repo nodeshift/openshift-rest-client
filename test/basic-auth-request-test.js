@@ -107,7 +107,7 @@ test('basic auth request with 404 status code', (t) => {
   p.catch((error) => {
     t.equal(
       error.message,
-      `Unable to authenticate user username to ${BASE_URL}. Cannot obtain access token from response.`,
+      `404 authentication url of ${settings.url} not found`,
       'should be equal'
     );
     t.end();
