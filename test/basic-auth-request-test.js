@@ -16,14 +16,8 @@ test('basic auth request', (t) => {
       return new Promise((resolve, reject) => {
         resolve({
           statusCode: 200,
-          body: {
-            json: () => {
-              return Promise.resolve({
-                uri: {
-                  hash: '#access_token=9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0&expires_in=86400&scope=user%3Afull&token_type=Bearer'
-                }
-              });
-            }
+          headers: {
+            location: 'https://oauth.u8qdh-6t6qc-66m.1742.p3.openshiftapps.com#access_token=9jXMEO87d7Rtf6FVQTFjumwIDbGeMzAtr2U010Z_ZG0&expires_in=86400&scope=user%3Afull&token_type=Bearer'
           }
         });
       });
@@ -113,7 +107,7 @@ test('basic auth request with 404 status code', (t) => {
   p.catch((error) => {
     t.equal(
       error.message,
-      `Unable to authenticate user username to ${BASE_URL}. Cannot obtain access token from response.`,
+      `404 authentication url of ${settings.url} not found`,
       'should be equal'
     );
     t.end();
