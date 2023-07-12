@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.0...v8.0.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* This fixes the url that is passed into the undici client. ([#367](https://github.com/nodeshift/openshift-rest-client/issues/367)) ([3f67ae3](https://github.com/nodeshift/openshift-rest-client/commit/3f67ae378ab3c91ff7c4ac1cddc2995914fb00f5)), closes [#330](https://github.com/nodeshift/openshift-rest-client/issues/330)
+* upgrade undici from 5.22.0 to 5.22.1 ([#361](https://github.com/nodeshift/openshift-rest-client/issues/361)) ([ddef013](https://github.com/nodeshift/openshift-rest-client/commit/ddef0138bcd70084d1c05be15f539a667362ca27))
+
 ## [8.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v7.1.1...v8.0.0) (2023-05-31)
 
 
