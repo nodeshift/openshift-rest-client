@@ -9,7 +9,7 @@ test('basic auth request', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -61,7 +61,7 @@ test('basic auth request with 404 status code', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -119,7 +119,7 @@ test('basic auth request with 401 status code', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -212,7 +212,7 @@ test('get user from token', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -266,7 +266,7 @@ test('get user from token URL join safety', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
       t.equal(url, `${BASE_URL}`, 'url should be equal to base url');
       this.url = url;
     }
@@ -317,7 +317,7 @@ test('get user from token with 401 status code', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
