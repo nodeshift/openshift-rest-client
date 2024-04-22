@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.2](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.1...v8.0.2) (2024-04-22)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#388](https://github.com/nodeshift/openshift-rest-client/issues/388)) ([67c2857](https://github.com/nodeshift/openshift-rest-client/commit/67c28579be5f16163cc3d0b535047a14723e0faa))
+* upgrade eslint from 8.40.0 to 8.43.0 ([#368](https://github.com/nodeshift/openshift-rest-client/issues/368)) ([7793892](https://github.com/nodeshift/openshift-rest-client/commit/7793892f8a21ae98878a8d310c4783e1e050157f))
+* upgrade eslint from 8.43.0 to 8.45.0 ([#374](https://github.com/nodeshift/openshift-rest-client/issues/374)) ([56842b2](https://github.com/nodeshift/openshift-rest-client/commit/56842b23cc0edefa8a180ad9aca3681d083d2ae1))
+* upgrade nock from 13.3.1 to 13.3.2 ([#373](https://github.com/nodeshift/openshift-rest-client/issues/373)) ([5807ba2](https://github.com/nodeshift/openshift-rest-client/commit/5807ba2a81cd83d957da81672f39342fed5c2d6e))
+* upgrade undici from 5.22.1 to 5.23.0 ([#379](https://github.com/nodeshift/openshift-rest-client/issues/379)) ([f01633a](https://github.com/nodeshift/openshift-rest-client/commit/f01633a2ec5c826ea6b221bbcad7d4cf2cf76de7))
+
 ## [8.0.1](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.0...v8.0.1) (2023-07-12)
 
 
