@@ -52,7 +52,7 @@ test('authorization server request URL join safety', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
       t.equal(url, `${BASE_URL}`, 'url should be equal to base url');
       this.url = url;
     }
@@ -94,7 +94,7 @@ test('authorization server request without insecureSkipTlsVerify', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, true, 'strictSSL should be true');
+      t.equal(options.connect.rejectUnauthorized, true, 'rejectUnauthorized should be true');
     }
 
     request (options) {
@@ -133,7 +133,7 @@ test('authorization server request with empty body', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -170,7 +170,7 @@ test('authorization server request with 404 status code', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
@@ -198,7 +198,7 @@ test('authorization server request with error', (t) => {
     static '@noCallThru' = true;
 
     constructor (url, options) {
-      t.equal(options.connect.strictSSL, false, 'strictSSL should be false');
+      t.equal(options.connect.rejectUnauthorized, false, 'rejectUnauthorized should be false');
     }
 
     request (options) {
