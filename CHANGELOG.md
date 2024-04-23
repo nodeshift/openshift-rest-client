@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.3...v9.0.0) (2024-04-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove Node 16 ([#402](https://github.com/nodeshift/openshift-rest-client/issues/402))
+
+### Features
+
+* Remove Node 16 ([#402](https://github.com/nodeshift/openshift-rest-client/issues/402)) ([36947b8](https://github.com/nodeshift/openshift-rest-client/commit/36947b8d16af1aa7bab9d4cfa2fcd02250169819))
+
 ## [8.0.3](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.2...v8.0.3) (2024-04-23)
 
 
