@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.3](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.2...v8.0.3) (2024-04-23)
+
+
+### Bug Fixes
+
+* upgrade tape from 5.6.3 to 5.7.5 ([#398](https://github.com/nodeshift/openshift-rest-client/issues/398)) ([271304a](https://github.com/nodeshift/openshift-rest-client/commit/271304a9a1dc7a76074b5627df8cd77a76b64776))
+* Use `rejectUnauthorzed` instead of `strictSSL` ([#401](https://github.com/nodeshift/openshift-rest-client/issues/401)) ([d5722b5](https://github.com/nodeshift/openshift-rest-client/commit/d5722b54d807e7db723631af11543f6ebf8a6b4f))
+
 ## [8.0.2](https://github.com/nodeshift/openshift-rest-client/compare/v8.0.1...v8.0.2) (2024-04-22)
 
 
