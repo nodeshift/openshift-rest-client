@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
-    - run: npx @pkgjs/support validate
+    - run: npx @pkgjs/support@latest validate
     - run: node_modules/nyc/bin/nyc.js report --reporter=lcovonly
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
