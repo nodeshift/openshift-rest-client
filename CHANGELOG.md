@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.1.1](https://github.com/nodeshift/openshift-rest-client/compare/v9.1.0...v9.1.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#435](https://github.com/nodeshift/openshift-rest-client/issues/435)) ([c8a68c9](https://github.com/nodeshift/openshift-rest-client/commit/c8a68c9a09bae1e5a24d4ae397ed9ecb1ee4a1ea))
+
 ## [9.1.0](https://github.com/nodeshift/openshift-rest-client/compare/v9.0.0...v9.1.0) (2024-08-07)
 
 
