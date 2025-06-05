@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.0.0](https://github.com/nodeshift/openshift-rest-client/compare/v9.1.1...v10.0.0) (2025-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove Node 18 support ([#450](https://github.com/nodeshift/openshift-rest-client/issues/450))
+
+### Features
+
+* add node 24 support ([#448](https://github.com/nodeshift/openshift-rest-client/issues/448)) ([2388f10](https://github.com/nodeshift/openshift-rest-client/commit/2388f1015ffaef20aaba4e5bf89701907ffb13ec))
+* remove Node 18 support ([#450](https://github.com/nodeshift/openshift-rest-client/issues/450)) ([7a13da1](https://github.com/nodeshift/openshift-rest-client/commit/7a13da1c65c55ae8a0f3e6e6205086d624464d77))
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#447](https://github.com/nodeshift/openshift-rest-client/issues/447)) ([754b282](https://github.com/nodeshift/openshift-rest-client/commit/754b2829dd0fdeb91de03d88ecc89b6d270f4e80))
+* upgrade nyc from 17.0.0 to 17.1.0 ([#444](https://github.com/nodeshift/openshift-rest-client/issues/444)) ([d98284b](https://github.com/nodeshift/openshift-rest-client/commit/d98284b45c802785e371d0d6174aa686781f3473))
+* upgrade tape from 5.8.1 to 5.9.0 ([#445](https://github.com/nodeshift/openshift-rest-client/issues/445)) ([1a22238](https://github.com/nodeshift/openshift-rest-client/commit/1a2223855acf622cca2a0e9f39541f03b26b75f0))
+
 ## [9.1.1](https://github.com/nodeshift/openshift-rest-client/compare/v9.1.0...v9.1.1) (2025-02-28)
 
 
