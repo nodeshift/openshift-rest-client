@@ -32,11 +32,11 @@
     }
   ],
   "engines": {
-    "node": "^24 || ^22 || ^20"
+    "node": "^26 || ^24 || ^22"
   },
   "repository": {
     "type": "git",
-    "url": "nodeshift/openshift-rest-client"
+    "url": "git+https://github.com/nodeshift/openshift-rest-client"
   },
   "bugs": "https://github.com/nodeshift/openshift-rest-client/issues",
   "license": "Apache-2.0",
